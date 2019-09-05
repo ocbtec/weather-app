@@ -114,8 +114,6 @@ function getDate() {
         "-" +
         ("0" + (date.getDay() + 1)).slice(-2);
 
-    // console.log(today);
-
     return [day, time, thirdDay, fourthDay, fifthDay];
 }
 
@@ -124,7 +122,22 @@ function highLowTemp(forecast) {
     let lowTempArray = [];
     let highTmp = [];
     let lowTmp = [];
-    let countVar = 4;
+
+    let counter = 0;
+    for (let i = 0; i < 7; i++) {
+        if (typeof result[i][6] === `string`) {
+            if (result[i][6].substring(8, 10) === presentDay) {
+                counter++;
+            }
+        }
+        if (typeof result[i][7] === `string`) {
+            if (result[i][7].substring(8, 10) === presentDay) {
+                counter++;
+            }
+        }
+    }
+
+    let countVar = counter;
     for (let j = 0; j < 4; j++) {
         for (let i = 0; i < 8; i++) {
             highTmp.push(forecast.list[i + countVar].main.temp_max);
@@ -135,8 +148,18 @@ function highLowTemp(forecast) {
     highTempArray.push(Math.max.apply(Math, highTmp));
     lowTempArray.push(Math.max.apply(Math, lowTmp));
 
-    let result = [];
-    for (var i in forecast) console.log([i, forecast[i]]);
+    result = forecast.list.map(Object.values);
+
+    let date = new Date();
+    let presentDay = ("0" + (date.getDay() + 1)).slice(-2);
+
+    // console.log(result[0][6].substring(8, 10));
+    // console.log(presentDay);
+    console.log(counter);
+    // console.log(result);
+    // console.log(result[0][6]);
+
+    // for (var i in forecast) console.log([i, forecast]);
 
     // for (var i in forecast) result.push([i, forecast.list[i]]);
     // console.log(forecast.list);
