@@ -1817,7 +1817,10 @@ const callAPI = (forecast, city_input) => {
       temp.innerHTML =
         getTemp(39)
           .toString()
-          .slice(0, 3) + '<span id="temp_symbol"></span>';
+          .slice(0, 4) + '<span id="temp_symbol"></span>';
+      // .toFixed(4)
+
+      console.log(temp.innerHTML);
 
       let temp_symbol = document.getElementById("temp_symbol");
       if (unit == "metric") {
@@ -1829,13 +1832,13 @@ const callAPI = (forecast, city_input) => {
       let temp_min = document.getElementById("temp_min");
       temp_min.innerHTML = `<span id="tempMinSpan">Min</span> ${getTempMin(39)
         .toString()
-        .slice(0, 3)}°`;
+        .slice(0, 4)}°`;
       document.getElementById("tempMinSpan").style.fontSize = "15pt";
 
       let temp_max = document.getElementById("temp_max");
       temp_max.innerHTML = `<span id="tempMaxSpan">Max</span> ${getTempMax(39)
         .toString()
-        .slice(0, 3)}°`;
+        .slice(0, 4)}°`;
       document.getElementById("tempMaxSpan").style.fontSize = "15pt";
 
       let overcast = document.getElementById("overcast");
@@ -1870,10 +1873,13 @@ const callAPI = (forecast, city_input) => {
     });
 
   // clear search input
-  //   city_input.value = "";
+  city_input != undefined && (city_input.value = "");
+  // console.log("CITY: " + city_input.value);
+
+  console.log("CITY: " + city);
 
   // hide mobile keyboard after input
-  // hideVirtualKeyboard();
+  hideVirtualKeyboard();
 };
 
 // loading Berlin as default
@@ -1931,30 +1937,26 @@ imperial.addEventListener("click", () => {
 
 let search_button = document.getElementById("search_button");
 search_button.addEventListener("click", () => {
-  let city_input = document.getElementById("city_input").value;
-  city_input = document.getElementById("city_input").value;
-
-  let forecast = url + city_input + "&units=" + unit + apiKey;
-
-  callAPI(forecast);
+  let city_input = document.getElementById("city_input");
+  if (city_input.value != "") {
+    let forecast = url + city_input.value + "&units=" + unit + apiKey;
+    callAPI(forecast, city_input);
+  }
 });
 
 document.querySelector("#city_input").addEventListener("keypress", function(e) {
   let key = e.which || e.keyCode;
   if (key === 13) {
-    let city_input = document.getElementById("city_input").value;
-    city_input = document.getElementById("city_input").value;
-
-    let forecast = url + city_input + "&units=" + unit + apiKey;
-
-    console.log("before api call" + city_input);
-    console.log(forecast, city_input);
-
-    callAPI(forecast);
-    // let country = data.city.country;
-    // display_city.innerHTML = `${capitalize(city_input)}, ${lookup.byFips(country)}`;
-    // display_city.innerHTML = `${city_input}`;
+    let city_input = document.getElementById("city_input");
+    if (city_input.value != "") {
+      let forecast = url + city_input.value + "&units=" + unit + apiKey;
+      callAPI(forecast, city_input);
+    }
   }
 });
+
+// let num = 25.3;
+// console.log(num.toFixed(2));
+// console.log("end");
 
 },{"axios":2,"capitalize":28,"hide-virtual-keyboard":29}]},{},[30]);
