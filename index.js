@@ -236,7 +236,3 @@ document.querySelector("#city_input").addEventListener("keypress", function(e) {
     }
   }
 });
-
-// let num = 25.3;
-// console.log(num.toFixed(2));
-// console.log("end");
