@@ -14,10 +14,15 @@
     </header>
 
     <section id="main">
+      <!-- <div
+        id="display_city"
+        contenteditable="true"
+        onclick="this.select();"
+      ></div> -->
       <div id="search">
         <div id="search_container">
-          <input id="city_input" placeholder="City ..." />
-          <button id="search_button">Go</button>
+          <input id="city_input" value="Berlin, DE" onclick="this.select();" />
+          <!-- <button id="search_button">Go</button> -->
         </div>
 
         <div id="temp_unit">
@@ -25,8 +30,6 @@
           <span id="imperial" class="temp_unit_class buttonOff">°F</span>
         </div>
       </div>
-
-      <div id="display_city"></div>
 
       <div id="circle">
         <img id="background_img" src="img/circle.svg" />

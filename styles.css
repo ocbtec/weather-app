@@ -21,7 +21,7 @@ body {
 header {
   padding: 10px;
   background-color: #4e5a6fcc;
-  height: 60px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -32,35 +32,38 @@ h1 {
 }
 
 #logo {
-  width: 16%;
+  width: 12%;
 }
 
 #main {
   position: relative;
   display: inline-block;
   width: 100%;
-  margin: 10px 0px;
 }
 
 #search {
-  margin: 0px 10px;
   display: flex;
+  width: 100%;
   justify-content: space-around;
   align-items: center;
 }
 
 #search_container {
   display: flex;
+  width: 100%;
 }
 
 #city_input {
   border-style: none;
+  outline: none;
   height: 30px;
-  color: #0b173a;
+  width: 100%;
+  color: white;
+  background-color: #263954a8;
   opacity: 0.5;
   font-size: 14pt;
-  width: 180px;
   padding: 4px;
+  padding-left: 15px;
 }
 
 button {
@@ -76,11 +79,9 @@ button {
 
 #temp_unit {
   display: flex;
-  background-color: #92999d;
-  width: 60px;
-  height: 30px;
   justify-content: space-around;
   align-items: center;
+  outline: none;
 }
 
 #circle {
@@ -173,6 +174,10 @@ button {
   vertical-align: -webkit-baseline-middle;
   padding: 5px 5px;
   background-color: #163516;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
 }
 
 .buttonOn {
@@ -219,8 +224,10 @@ button {
 }
 
 #display_city {
-  font-size: 20pt;
-  background-color: red;
+  background-color: #26395470;
+  height: 50px;
+  line-height: 50px;
+  font-size: 16pt;
   text-align: center;
-  /* margin: 10px 0; */
+  outline: none;
 }

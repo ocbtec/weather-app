@@ -86,23 +86,9 @@ const callAPI = (forecast, city_input) => {
         return temp;
       };
 
-      // print out the the weather forecast for the next 6 days TO console
-      // console.log(`It is now ${getTemp(39)} in ${capitalize(city)}`);
-      // console.log(`The current weather conditions are: ${data.list[0].weather[0].description}`);
-      // console.log(`Forecast for tomorrow: ${data.list[0].main.temp} in ${capitalize(city)}`);
-      // console.log(`Forecast for ${getDate(24)}: ${getTemp(24)} in ${capitalize(city)}`);
-      // console.log(`Forecast for ${getDate(16)}: ${getTemp(16)} in ${capitalize(city)}`);
-      // console.log(`Forecast for ${getDate(8)}: ${getTemp(8)} in ${capitalize(city)}`);
-      // console.log(`Forecast for ${getDate(0)}: ${getTemp(0)} in ${capitalize(city)}`);
-
       let temp = document.getElementById("temp");
-      temp.innerHTML =
-        getTemp(39)
-          .toString()
-          .slice(0, 4) + '<span id="temp_symbol"></span>';
-      // .toFixed(4)
-
-      console.log(temp.innerHTML);
+      let temp_string = getTemp(39).toFixed(1);
+      temp.innerHTML = temp_string + '<span id="temp_symbol"></span>';
 
       let temp_symbol = document.getElementById("temp_symbol");
       if (unit == "metric") {
@@ -112,32 +98,47 @@ const callAPI = (forecast, city_input) => {
       }
 
       let temp_min = document.getElementById("temp_min");
-      temp_min.innerHTML = `<span id="tempMinSpan">Min</span> ${getTempMin(39)
-        .toString()
-        .slice(0, 4)}°`;
+      let temp_min_string = getTempMin(39).toFixed(1);
+      temp_min.innerHTML = `${temp_min_string}° <span id="tempMinSpan">Min</span>`;
       document.getElementById("tempMinSpan").style.fontSize = "15pt";
 
       let temp_max = document.getElementById("temp_max");
-      temp_max.innerHTML = `<span id="tempMaxSpan">Max</span> ${getTempMax(39)
-        .toString()
-        .slice(0, 4)}°`;
+      let temp_max_string = getTemp(39).toFixed(1);
+      temp_max.innerHTML = `${temp_max_string}° <span id="tempMaxSpan">Max</span> `;
       document.getElementById("tempMaxSpan").style.fontSize = "15pt";
 
       let overcast = document.getElementById("overcast");
       overcast.innerHTML = getOvercast(39);
 
       let wind = document.getElementById("wind");
-      wind.innerHTML = `Wind: ${getWind(39)} km/h`;
+      let wind_string = getWind(39).toFixed(1);
+      wind.innerHTML = `Wind: ${getWind(39).toFixed(1)} ${
+        unit === "metric" ? `m/s` : "mph"
+      }`;
 
       let humidity = document.getElementById("humidity");
-      humidity.innerHTML = `Humidity: ${getHumidity(39)}`;
+      humidity.innerHTML = `Humidity: ${getHumidity(39)}%`;
 
       let country = data.city.country;
       console.log(country);
 
-      display_city.innerHTML = `${
-        data.city.name == undefined ? "Berlin" : data.city.name
-      }, ${country}`;
+      console.log("CITY INPUT");
+      console.log(city_input);
+      console.log(data.city.name);
+
+      if (city_input !== undefined) {
+        city_input.value = `${
+          city_input == undefined ? "Berlin" : data.city.name
+        }, ${country}`;
+      }
+
+      // city_input.value = `${
+      //   city_input == undefined ? "Berlin" : data.city.name
+      // }, ${country}`;
+
+      // display_city.innerHTML = `${
+      //   data.city.name == undefined ? "Berlin" : data.city.name
+      // }, ${country}`;
     })
     .catch(error => {
       console.error("City not found, try again ¯\\_(ツ)_/¯");
@@ -217,14 +218,14 @@ imperial.addEventListener("click", () => {
   callAPI(forecast);
 });
 
-let search_button = document.getElementById("search_button");
-search_button.addEventListener("click", () => {
-  let city_input = document.getElementById("city_input");
-  if (city_input.value != "") {
-    let forecast = url + city_input.value + "&units=" + unit + apiKey;
-    callAPI(forecast, city_input);
-  }
-});
+// let search_button = document.getElementById("search_button");
+// search_button.addEventListener("click", () => {
+//   let city_input = document.getElementById("city_input");
+//   if (city_input.value != "") {
+//     let forecast = url + city_input.value + "&units=" + unit + apiKey;
+//     callAPI(forecast, city_input);
+//   }
+// });
 
 document.querySelector("#city_input").addEventListener("keypress", function(e) {
   let key = e.which || e.keyCode;
