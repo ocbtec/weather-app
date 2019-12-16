@@ -63,7 +63,7 @@ h1 {
   opacity: 0.5;
   font-size: 14pt;
   padding: 4px;
-  padding-left: 15px;
+  padding-left: 45px;
 }
 
 button {
@@ -230,4 +230,19 @@ button {
   font-size: 16pt;
   text-align: center;
   outline: none;
+}
+
+#location-icon {
+  width: 15px;
+  position: absolute;
+  top: 10px;
+  left: 12px;
+}
+
+#temp_min,
+#temp_max,
+#overcast,
+#wind,
+#humidity {
+  color: #cccccc;
 }

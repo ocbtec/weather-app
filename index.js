@@ -49,6 +49,19 @@ const callAPI = (forecast, city_input) => {
         return `${month} ${day}`;
       };
 
+      // const getCurrentTime = num => {
+      //   let day = 39 - num;
+      //   let time = data.list[day].dt_txt.slice(5, 10);
+      //   console.log("TEST ---------------------------------");
+      //   console.log(time);
+
+      //   // .slice(5, 10);
+      //   // time = tmpTime.slice(3, 5);
+      //   // month = monthArray[tmpTime.slice(0, 2) - 1];
+
+      //   return null;
+      // };
+
       // get temperature from weather API
       const getTemp = num => {
         let day = 39 - num;
@@ -91,6 +104,7 @@ const callAPI = (forecast, city_input) => {
       temp.innerHTML = temp_string + '<span id="temp_symbol"></span>';
 
       let temp_symbol = document.getElementById("temp_symbol");
+      temp_symbol.style.color = "#cccccc";
       if (unit == "metric") {
         temp_symbol.innerHTML = " °C";
       } else if (unit == "imperial") {
@@ -100,12 +114,14 @@ const callAPI = (forecast, city_input) => {
       let temp_min = document.getElementById("temp_min");
       let temp_min_string = getTempMin(39).toFixed(1);
       temp_min.innerHTML = `${temp_min_string}° <span id="tempMinSpan">Min</span>`;
-      document.getElementById("tempMinSpan").style.fontSize = "15pt";
+      document.getElementById("tempMinSpan").style.cssText =
+        "font-size: 15pt; color: #cccccc";
 
       let temp_max = document.getElementById("temp_max");
       let temp_max_string = getTemp(39).toFixed(1);
       temp_max.innerHTML = `${temp_max_string}° <span id="tempMaxSpan">Max</span> `;
-      document.getElementById("tempMaxSpan").style.fontSize = "15pt";
+      document.getElementById("tempMaxSpan").style.cssText =
+        "font-size: 15pt; color: #cccccc";
 
       let overcast = document.getElementById("overcast");
       overcast.innerHTML = getOvercast(39);
@@ -132,26 +148,22 @@ const callAPI = (forecast, city_input) => {
         }, ${country}`;
       }
 
-      // city_input.value = `${
-      //   city_input == undefined ? "Berlin" : data.city.name
-      // }, ${country}`;
-
-      // display_city.innerHTML = `${
-      //   data.city.name == undefined ? "Berlin" : data.city.name
-      // }, ${country}`;
+      // console.log(getCurrentTime(39));
     })
     .catch(error => {
+      city_input.value = `${data.city.name}, ${data.city.country}`;
       console.error("City not found, try again ¯\\_(ツ)_/¯");
-
-      console.log(error);
-
       let error_msg_box = document.getElementById("not_found_container");
       error_msg_box.style.display = "flex";
 
       let error_close = document.getElementById("not_found_icon");
-      error_close.addEventListener("click", () => {
+
+      document.addEventListener("click", () => {
         error_msg_box.style.display = "none";
       });
+      // error_close.addEventListener("click", () => {
+      //   error_msg_box.style.display = "none";
+      // });
       console.log(error);
     });
 
@@ -237,3 +249,22 @@ document.querySelector("#city_input").addEventListener("keypress", function(e) {
     }
   }
 });
+
+// const date1 = new Date("August 19, 1975 23:15:30 GMT+07:00");
+// console.log(date1.getTimezoneOffset());
+
+// var offset = -8;
+// let time = new Date(new Date().getTime() + offset * 3600 * 1000)
+//   .toUTCString()
+//   .replace(/ GMT$/, "");
+// console.log(time);
+
+// let seconds = TimeZone.current.secondsFromGMT();
+
+// let hours = seconds / 3600;
+// let minutes = abs(seconds / 60) % 60;
+
+// let tz = String((format = "%+.2d:%.2d"), hours, minutes);
+// console.log(tz);
+
+// print(tz); // "+01:00"
