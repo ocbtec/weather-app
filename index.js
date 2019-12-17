@@ -41,7 +41,7 @@ const callAPI = (forecast, city_input) => {
 
       // get month and day from the weather API
       const getDate = num => {
-        let day = 39 - num;
+        let day = num;
         tmpDate = data.list[day].dt_txt.slice(5, 10);
         day = tmpDate.slice(3, 5);
         month = monthArray[tmpDate.slice(0, 2) - 1];
@@ -63,55 +63,55 @@ const callAPI = (forecast, city_input) => {
 
       // get temperature from weather API
       const getTemp = num => {
-        let day = 39 - num;
+        let day = num;
         let temp = data.list[day].main.temp;
         return temp;
       };
 
       const getTempMin = num => {
-        let day = 39 - num;
+        let day = num;
         let temp = data.list[day].main.temp_min;
         return temp;
       };
 
       const getTempMax = num => {
-        let day = 39 - num;
+        let day = num;
         let temp = data.list[day].main.temp_max;
         return temp;
       };
 
       const getOvercast = num => {
-        let day = 39 - num;
+        let day = num;
         let temp = data.list[day].weather[0].description;
         return temp;
       };
 
       const getWind = num => {
-        let day = 39 - num;
+        let day = num;
         let temp = data.list[day].wind.speed;
         return temp;
       };
 
       const getWindDirection = num => {
-        let day = 39 - num;
+        let day = num;
         let wind = data.list[day].wind.deg;
         return wind;
       };
 
       const getHumidity = num => {
-        let day = 39 - num;
+        let day = num;
         let temp = data.list[day].main.humidity;
         return temp;
       };
 
       const getIcon = num => {
-        let day = 39 - num;
+        let day = num;
         let icon = data.list[day].weather[0].icon;
         return icon;
       };
 
       let temp = document.getElementById("temp");
-      let temp_string = getTemp(39).toFixed(1);
+      let temp_string = getTemp(0).toFixed(1);
       temp.innerHTML = temp_string + '<span id="temp_symbol"></span>';
 
       let temp_symbol = document.getElementById("temp_symbol");
@@ -123,31 +123,31 @@ const callAPI = (forecast, city_input) => {
       }
 
       let temp_min = document.getElementById("temp_min");
-      let temp_min_string = getTempMin(39).toFixed(1);
+      let temp_min_string = getTempMin(0).toFixed(1);
       temp_min.innerHTML = `${temp_min_string}° <span id="tempMinSpan">Min</span>`;
       document.getElementById("tempMinSpan").style.cssText =
         "font-size: 12pt; color: #cccccc";
 
       let temp_max = document.getElementById("temp_max");
-      let temp_max_string = getTempMax(39).toFixed(1);
+      let temp_max_string = getTempMax(0).toFixed(1);
       temp_max.innerHTML = `${temp_max_string}° <span id="tempMaxSpan">Max</span> `;
       document.getElementById("tempMaxSpan").style.cssText =
         "font-size: 12pt; color: #cccccc";
 
       let overcast = document.getElementById("overcast");
-      overcast.innerHTML = getOvercast(39);
+      overcast.innerHTML = getOvercast(0);
 
       let wind = document.getElementById("wind");
-      let wind_string = getWind(39).toFixed(1);
-      wind.innerHTML = `Wind: ${getWind(39).toFixed(1)} ${
+      let wind_string = getWind(0).toFixed(1);
+      wind.innerHTML = `Wind: ${getWind(0).toFixed(1)} ${
         unit === "metric" ? `m/s` : "mph"
       }`;
 
       let humidity = document.getElementById("humidity");
-      humidity.innerHTML = `Humidity: ${getHumidity(39)}%`;
+      humidity.innerHTML = `Humidity: ${getHumidity(0)}%`;
 
       let icon = document.getElementById("icon");
-      icon.src = `http://openweathermap.org/img/wn/${getIcon(39)}@2x.png`;
+      icon.src = `http://openweathermap.org/img/wn/${getIcon(0)}@2x.png`;
 
       let country = data.city.country;
 
@@ -158,16 +158,66 @@ const callAPI = (forecast, city_input) => {
         }, ${country}`;
       }
 
-      // print out the the weather forecast for the next 6 days TO console
-
+      // weather forecast for tomorrow
+      document.getElementById("day-2-temp-min").innerHTML = `${getTempMin(
+        7
+      ).toFixed(1)}°`;
+      document.getElementById("day-2-temp-max").innerHTML = `${getTempMax(
+        7
+      ).toFixed(1)}°`;
+      document.getElementById("day-2-date").innerHTML = getDate(7);
       document.getElementById(
-        "day-2"
-      ).innerHTML = data.list[0].main.temp.toFixed(1);
-      console.log(
-        `Forecast for tomorrow: ${data.list[0].main.temp} in ${capitalize(
-          city
-        )}`
-      );
+        "day-2-icon"
+      ).src = `http://openweathermap.org/img/wn/${getIcon(7)}@2x.png`;
+
+      // weather forecast for 2nd day
+      document.getElementById("day-3-temp-min").innerHTML = `${getTempMin(
+        15
+      ).toFixed(1)}°`;
+      document.getElementById("day-3-temp-max").innerHTML = `${getTempMax(
+        15
+      ).toFixed(1)}°`;
+      document.getElementById("day-3-date").innerHTML = getDate(15);
+      document.getElementById(
+        "day-3-icon"
+      ).src = `http://openweathermap.org/img/wn/${getIcon(15)}@2x.png`;
+
+      // weather forecast for 3nd day
+      document.getElementById("day-4-temp-min").innerHTML = `${getTempMin(
+        23
+      ).toFixed(1)}°`;
+      document.getElementById("day-4-temp-max").innerHTML = `${getTempMax(
+        23
+      ).toFixed(1)}°`;
+      document.getElementById("day-4-date").innerHTML = getDate(23);
+      document.getElementById(
+        "day-4-icon"
+      ).src = `http://openweathermap.org/img/wn/${getIcon(23)}@2x.png`;
+
+      // weather forecast for 4nd day
+      document.getElementById("day-5-temp-min").innerHTML = `${getTempMin(
+        31
+      ).toFixed(1)}°`;
+      document.getElementById("day-5-temp-max").innerHTML = `${getTempMax(
+        31
+      ).toFixed(1)}°`;
+      document.getElementById("day-5-date").innerHTML = getDate(31);
+      document.getElementById(
+        "day-5-icon"
+      ).src = `http://openweathermap.org/img/wn/${getIcon(31)}@2x.png`;
+
+      // weather forecast for 5nd day
+      document.getElementById("day-6-temp-min").innerHTML = `${getTempMin(
+        39
+      ).toFixed(1)}°`;
+      document.getElementById("day-6-temp-max").innerHTML = `${getTempMax(
+        39
+      ).toFixed(1)}°`;
+      document.getElementById("day-6-date").innerHTML = getDate(39);
+      document.getElementById(
+        "day-6-icon"
+      ).src = `http://openweathermap.org/img/wn/${getIcon(39)}@2x.png`;
+
       // console.log(`Forecast for ${getDate(24)}: ${getTemp(24)} in ${capitalize(city)}`);
       // console.log(`Forecast for ${getDate(16)}: ${getTemp(16)} in ${capitalize(city)}`);
       // console.log(`Forecast for ${getDate(8)}: ${getTemp(8)} in ${capitalize(city)}`);
