@@ -1841,7 +1841,7 @@ const callAPI = (forecast, city_input) => {
         "font-size: 12pt; color: #cccccc";
 
       let temp_max = document.getElementById("temp_max");
-      let temp_max_string = getTemp(39).toFixed(1);
+      let temp_max_string = getTempMax(39).toFixed(1);
       temp_max.innerHTML = `${temp_max_string}° <span id="tempMaxSpan">Max</span> `;
       document.getElementById("tempMaxSpan").style.cssText =
         "font-size: 12pt; color: #cccccc";
