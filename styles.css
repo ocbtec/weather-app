@@ -163,19 +163,6 @@ button {
   text-align: center;
 }
 
-#wind-indicator {
-  position: absolute;
-  top: 25%;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  width: 3px;
-  height: 50%;
-  background-color: #01060d2b;
-  /* transform: translate(0, -25%); */
-  /* transform: scale(0.5); */
-  /* animation: wind-animation 2.3s 1.5s linear 1; */
-}
 #icon {
   position: absolute;
   top: 65%;

@@ -1855,22 +1855,6 @@ const callAPI = (forecast, city_input) => {
         unit === "metric" ? `m/s` : "mph"
       }`;
 
-      let wind_indicator = document.getElementById("wind-indicator");
-      let degree = getWindDirection(39);
-      degree = degree + 360;
-
-      // wind indicator
-      wind_indicator.animate(
-        [
-          { transform: `rotate(0deg) translate(0, 50%) rotate(0deg)` },
-          { transform: `rotate(${degree}deg) translate(0, 50%) rotate(0deg)` }
-        ],
-        {
-          duration: 800,
-          fill: "forwards"
-        }
-      );
-
       let humidity = document.getElementById("humidity");
       humidity.innerHTML = `Humidity: ${getHumidity(39)}%`;
 
@@ -2022,7 +2006,6 @@ document.getElementById("city_input").addEventListener("click", () => {
       navigator.userAgent
     )
   ) {
-    window.navigator.vibrate(200);
     document.getElementById("forecast-container").style.transform =
       "translate(0px, 300px)";
   }
