@@ -1753,7 +1753,8 @@ const callAPI = (forecast, city_input) => {
   axios
     .get(forecast)
     .then(response => {
-      // console.log("city at api start" + city_input);
+      // console.log("------------------------");
+      console.log(forecast);
 
       data = response.data;
 

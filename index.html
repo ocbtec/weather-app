@@ -8,58 +8,63 @@
     <title>Weather App</title>
   </head>
   <body>
-    <header>
-      <h1>WeatherApp</h1>
-      <img id="logo" src="img/logo.svg" />
-    </header>
+    <div class="grid">
+      <header>
+        <h1>WeatherApp</h1>
+        <img id="logo" src="img/logo.svg" />
+      </header>
 
-    <section id="main">
-      <!-- <div
+      <section id="main">
+        <!-- <div
         id="display_city"
         contenteditable="true"
         onclick="this.select();"
       ></div> -->
-      <div id="search">
-        <div id="search_container">
-          <img id="location-icon" src="img/location.svg" alt="" />
-          <input id="city_input" value="Berlin, DE" onclick="this.select();" />
-          <!-- <button id="search_button">Go</button> -->
+        <div id="search">
+          <div id="search_container">
+            <img id="location-icon" src="img/location.svg" alt="" />
+            <input
+              id="city_input"
+              value="Berlin, DE"
+              onclick="this.select();"
+            />
+            <!-- <button id="search_button">Go</button> -->
+          </div>
+
+          <div id="temp_unit">
+            <span id="celsius" class="temp_unit_class buttonOn">°C</span>
+            <span id="imperial" class="temp_unit_class buttonOff">°F</span>
+          </div>
         </div>
 
-        <div id="temp_unit">
-          <span id="celsius" class="temp_unit_class buttonOn">°C</span>
-          <span id="imperial" class="temp_unit_class buttonOff">°F</span>
+        <div id="circle">
+          <img id="background_img" src="img/circle.svg" />
+          <div id="weather_data">
+            <div id="temp"></div>
+            <div id="temp_min"></div>
+            <div id="temp_max"></div>
+            <div id="icon-container">
+              <img
+                id="icon"
+                src="http://openweathermap.org/img/wn/10d@2x.png"
+                alt="Weather icon"
+              />
+            </div>
+            <div id="overcast"></div>
+            <div id="wind"></div>
+            <div id="humidity"></div>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <div id="circle">
-        <img id="background_img" src="img/circle.svg" />
+      <div id="forecast-container">
+        <div id="day-2" class="forecast"></div>
+        <div id="day-3" class="forecast"></div>
+        <div id="day-4" class="forecast"></div>
+        <div id="day-5" class="forecast"></div>
+        <div id="day-6" class="forecast"></div>
+        <div id="day-7" class="forecast"></div>
       </div>
-
-      <div id="weather_data">
-        <div id="temp"></div>
-        <div id="temp_min"></div>
-        <div id="temp_max"></div>
-        <div id="icon-container">
-          <img
-            id="icon"
-            src="http://openweathermap.org/img/wn/10d@2x.png"
-            alt="Weather icon"
-          />
-        </div>
-        <div id="overcast"></div>
-        <div id="wind"></div>
-        <div id="humidity"></div>
-      </div>
-    </section>
-
-    <div id="forecast-container">
-      <div id="day-2" class="forecast"></div>
-      <div id="day-3" class="forecast"></div>
-      <div id="day-4" class="forecast"></div>
-      <div id="day-5" class="forecast"></div>
-      <div id="day-6" class="forecast"></div>
-      <div id="day-7" class="forecast"></div>
     </div>
 
     <div id="not_found_container">
