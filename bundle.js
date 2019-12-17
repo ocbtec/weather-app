@@ -1767,18 +1767,18 @@ const callAPI = (forecast, city_input) => {
         return `${month} ${day}`;
       };
 
-      const getCurrentTime = num => {
-        let day = 39 - num;
-        let time = data.list[day].dt_txt.slice(5, 10);
-        console.log("TEST ---------------------------------");
-        console.log(time);
+      // const getCurrentTime = num => {
+      //   let day = 39 - num;
+      //   let time = data.list[day].dt_txt.slice(5, 10);
+      //   console.log("TEST ---------------------------------");
+      //   console.log(time);
 
-        // .slice(5, 10);
-        // time = tmpTime.slice(3, 5);
-        // month = monthArray[tmpTime.slice(0, 2) - 1];
+      //   // .slice(5, 10);
+      //   // time = tmpTime.slice(3, 5);
+      //   // month = monthArray[tmpTime.slice(0, 2) - 1];
 
-        return null;
-      };
+      //   return null;
+      // };
 
       // get temperature from weather API
       const getTemp = num => {
@@ -1811,6 +1811,12 @@ const callAPI = (forecast, city_input) => {
         return temp;
       };
 
+      const getWindDirection = num => {
+        let day = 39 - num;
+        let wind = data.list[day].wind.deg;
+        return wind;
+      };
+
       const getHumidity = num => {
         let day = 39 - num;
         let temp = data.list[day].main.humidity;
@@ -1833,13 +1839,13 @@ const callAPI = (forecast, city_input) => {
       let temp_min_string = getTempMin(39).toFixed(1);
       temp_min.innerHTML = `${temp_min_string}° <span id="tempMinSpan">Min</span>`;
       document.getElementById("tempMinSpan").style.cssText =
-        "font-size: 15pt; color: #cccccc";
+        "font-size: 12pt; color: #cccccc";
 
       let temp_max = document.getElementById("temp_max");
       let temp_max_string = getTemp(39).toFixed(1);
       temp_max.innerHTML = `${temp_max_string}° <span id="tempMaxSpan">Max</span> `;
       document.getElementById("tempMaxSpan").style.cssText =
-        "font-size: 15pt; color: #cccccc";
+        "font-size: 12pt; color: #cccccc";
 
       let overcast = document.getElementById("overcast");
       overcast.innerHTML = getOvercast(39);
@@ -1849,6 +1855,25 @@ const callAPI = (forecast, city_input) => {
       wind.innerHTML = `Wind: ${getWind(39).toFixed(1)} ${
         unit === "metric" ? `m/s` : "mph"
       }`;
+
+      let wind_indicator = document.getElementById("wind-indicator");
+      let degree = getWindDirection(39);
+      degree = degree + 360;
+
+      // console.log("DEGREE _____________________-------------" + degree);
+
+      // wind_indicator.style.cssText = `position: absolute; left: 0; right: 0; margin: 0 auto; width: 3px; height: 50%;`;
+
+      wind_indicator.animate(
+        [
+          { transform: `rotate(0deg) translate(0, 50%) rotate(0deg)` },
+          { transform: `rotate(${degree}deg) translate(0, 50%) rotate(0deg)` }
+        ],
+        {
+          duration: 900,
+          fill: "forwards"
+        }
+      );
 
       let humidity = document.getElementById("humidity");
       humidity.innerHTML = `Humidity: ${getHumidity(39)}%`;
@@ -1866,7 +1891,7 @@ const callAPI = (forecast, city_input) => {
         }, ${country}`;
       }
 
-      console.log(getCurrentTime(39));
+      // console.log(getCurrentTime(39));
     })
     .catch(error => {
       city_input.value = `${data.city.name}, ${data.city.country}`;
