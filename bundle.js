@@ -1753,8 +1753,7 @@ const callAPI = (forecast, city_input) => {
   axios
     .get(forecast)
     .then(response => {
-      // console.log("------------------------");
-      console.log(forecast);
+      // console.log("city at api start" + city_input);
 
       data = response.data;
 
@@ -1823,6 +1822,12 @@ const callAPI = (forecast, city_input) => {
         return temp;
       };
 
+      const getIcon = num => {
+        let day = 39 - num;
+        let icon = data.list[day].weather[0].icon;
+        return icon;
+      };
+
       let temp = document.getElementById("temp");
       let temp_string = getTemp(39).toFixed(1);
       temp.innerHTML = temp_string + '<span id="temp_symbol"></span>';
@@ -1858,6 +1863,9 @@ const callAPI = (forecast, city_input) => {
 
       let humidity = document.getElementById("humidity");
       humidity.innerHTML = `Humidity: ${getHumidity(39)}%`;
+
+      let icon = document.getElementById("icon");
+      icon.src = `http://openweathermap.org/img/wn/${getIcon(39)}@2x.png`;
 
       let country = data.city.country;
 
