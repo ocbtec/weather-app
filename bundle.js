@@ -1925,6 +1925,11 @@ const callAPI = (forecast, city_input) => {
 
   // hide mobile keyboard after input
   hideVirtualKeyboard();
+  setTimeout(() => {
+    document.getElementById(
+      "forecast-container"
+    ).style.cssText = `transform: translate(0,0)`;
+  }, 200);
 };
 
 // loading Berlin as default
@@ -2008,6 +2013,18 @@ document.querySelector("#city_input").addEventListener("keypress", function(e) {
       let forecast = url + city_input.value + "&units=" + unit + apiKey;
       callAPI(forecast, city_input);
     }
+  }
+});
+
+document.getElementById("city_input").addEventListener("click", () => {
+  if (
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    )
+  ) {
+    window.navigator.vibrate(200);
+    document.getElementById("forecast-container").style.transform =
+      "translate(0px, 300px)";
   }
 });
 

@@ -5,15 +5,14 @@
   color: white;
 }
 
-html,
-body {
+html {
   height: 100vh;
-}
 
-body {
-  background-color: white;
-  background-image: url(img/background_cloudy.jpg);
-  background-size: auto 100%;
+  background: url(img/background_cloudy.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: left top;
 }
@@ -243,7 +242,7 @@ button {
   } */
 }
 
-#forecast {
+#forecast-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
