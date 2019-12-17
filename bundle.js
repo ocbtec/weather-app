@@ -1754,7 +1754,6 @@ const callAPI = (forecast, city_input) => {
     .get(forecast)
     .then(response => {
       // console.log("city at api start" + city_input);
-      console.log(forecast);
 
       data = response.data;
 
@@ -1860,17 +1859,14 @@ const callAPI = (forecast, city_input) => {
       let degree = getWindDirection(39);
       degree = degree + 360;
 
-      // console.log("DEGREE _____________________-------------" + degree);
-
-      // wind_indicator.style.cssText = `position: absolute; left: 0; right: 0; margin: 0 auto; width: 3px; height: 50%;`;
-
+      // wind indicator
       wind_indicator.animate(
         [
           { transform: `rotate(0deg) translate(0, 50%) rotate(0deg)` },
           { transform: `rotate(${degree}deg) translate(0, 50%) rotate(0deg)` }
         ],
         {
-          duration: 900,
+          duration: 800,
           fill: "forwards"
         }
       );
@@ -1879,17 +1875,28 @@ const callAPI = (forecast, city_input) => {
       humidity.innerHTML = `Humidity: ${getHumidity(39)}%`;
 
       let country = data.city.country;
-      console.log(country);
 
-      console.log("CITY INPUT");
-      console.log(city_input);
-      console.log(data.city.name);
-
+      // use last city as fallback for input field
       if (city_input !== undefined) {
         city_input.value = `${
           city_input == undefined ? "Berlin" : data.city.name
         }, ${country}`;
       }
+
+      // print out the the weather forecast for the next 6 days TO console
+
+      document.getElementById(
+        "day-2"
+      ).innerHTML = data.list[0].main.temp.toFixed(1);
+      console.log(
+        `Forecast for tomorrow: ${data.list[0].main.temp} in ${capitalize(
+          city
+        )}`
+      );
+      // console.log(`Forecast for ${getDate(24)}: ${getTemp(24)} in ${capitalize(city)}`);
+      // console.log(`Forecast for ${getDate(16)}: ${getTemp(16)} in ${capitalize(city)}`);
+      // console.log(`Forecast for ${getDate(8)}: ${getTemp(8)} in ${capitalize(city)}`);
+      // console.log(`Forecast for ${getDate(0)}: ${getTemp(0)} in ${capitalize(city)}`);
 
       // console.log(getCurrentTime(39));
     })
@@ -1940,11 +1947,21 @@ celsius.addEventListener("click", () => {
   let city_input = document.getElementById("city_input").value;
   city_input = document.getElementById("city_input").value;
 
-  let forecast = "";
-  city_input != ""
-    ? (forecast = url + city_input + "&units=" + unit + apiKey)
-    : (forecast = url + city + "&units=" + unit + apiKey);
+  console.log("-------------" + city_input.indexOf(","));
+  city_input.slice(0, 2);
+  console.log(city_input);
 
+  let string_1 = "halli hallo";
+  console.log("TEST STRING: " + string_1.slice(0, 2));
+
+  console.log(city);
+
+  let forecast = "";
+  // city_input != ""
+  //   ? (forecast = url + city_input + "&units=" + unit + apiKey)
+  //   : (forecast = url + city + "&units=" + unit + apiKey);
+
+  forecast = url + city + "&units=" + unit + apiKey;
   console.log(forecast);
 
   callAPI(forecast);
@@ -1962,9 +1979,10 @@ imperial.addEventListener("click", () => {
   city_input = document.getElementById("city_input").value;
 
   let forecast = "";
-  city_input != ""
-    ? (forecast = url + city_input + "&units=" + unit + apiKey)
-    : (forecast = url + city + "&units=" + unit + apiKey);
+  // city_input != ""
+  //   ? (forecast = url + city_input + "&units=" + unit + apiKey)
+  //   : (forecast = url + city + "&units=" + unit + apiKey);
+  forecast = url + city + "&units=" + unit + apiKey;
 
   console.log(city_input);
 
