@@ -29,6 +29,8 @@ let tmpDate = "";
 let unit = "metric";
 let city = "Berlin";
 
+let refresh_time = 1000;
+
 let data = "";
 
 const callAPI = (forecast, city_input) => {
@@ -65,6 +67,12 @@ const callAPI = (forecast, city_input) => {
       const getTemp = num => {
         let day = num;
         let temp = data.list[day].main.temp;
+        return temp;
+      };
+
+      const getFeelsLikeTemp = num => {
+        let day = num;
+        let temp = data.list[day].main.feels_like;
         return temp;
       };
 
@@ -110,41 +118,65 @@ const callAPI = (forecast, city_input) => {
         return icon;
       };
 
-      let temp = document.getElementById("temp");
+      let temp = document.getElementById("temp-value");
       let temp_string = getTemp(0).toFixed(1);
-      temp.innerHTML = temp_string + '<span id="temp_symbol"></span>';
 
-      let temp_symbol = document.getElementById("temp_symbol");
+      setTimeout(() => {
+        temp.innerHTML = temp_string;
+      }, refresh_time);
+
+      let temp_symbol = document.getElementById("temp-symbol");
       temp_symbol.style.color = "#cccccc";
-      if (unit == "metric") {
-        temp_symbol.innerHTML = " °C";
-      } else if (unit == "imperial") {
-        temp_symbol.innerHTML = " °F";
-      }
+      setTimeout(() => {
+        if (unit == "metric") {
+          temp_symbol.innerHTML = " °C";
+        } else if (unit == "imperial") {
+          temp_symbol.innerHTML = " °F";
+        }
+      }, refresh_time);
+
+      let feels_like_temp = document.getElementById("feels-like-temp");
+      let feels_like_temp_string = getFeelsLikeTemp(0).toFixed(1);
+
+      setTimeout(() => {
+        feels_like_temp.innerHTML = `Feels like <span id="feels-like-temp-value">${feels_like_temp_string}°</span>`;
+      }, refresh_time + 50);
 
       let temp_min = document.getElementById("temp_min");
       let temp_min_string = getTempMin(0).toFixed(1);
-      temp_min.innerHTML = `${temp_min_string}° <span id="tempMinSpan">Min</span>`;
-      document.getElementById("tempMinSpan").style.cssText =
-        "font-size: 12pt; color: #cccccc";
 
       let temp_max = document.getElementById("temp_max");
       let temp_max_string = getTempMax(0).toFixed(1);
-      temp_max.innerHTML = `${temp_max_string}° <span id="tempMaxSpan">Max</span> `;
-      document.getElementById("tempMaxSpan").style.cssText =
-        "font-size: 12pt; color: #cccccc";
+
+      setTimeout(() => {
+        temp_min.innerHTML = `${temp_min_string}° <span id="tempMinSpan">Min</span>`;
+        document.getElementById("tempMinSpan").style.cssText =
+          "font-size: 12pt; color: #cccccc";
+        temp_max.innerHTML = `${temp_max_string}° <span id="tempMaxSpan">Max</span> `;
+        document.getElementById("tempMaxSpan").style.cssText =
+          "font-size: 12pt; color: #cccccc";
+      }, refresh_time + 100);
 
       let overcast = document.getElementById("overcast");
-      overcast.innerHTML = getOvercast(0);
+
+      setTimeout(() => {
+        overcast.innerHTML = getOvercast(0);
+      }, refresh_time + 110);
 
       let wind = document.getElementById("wind");
       let wind_string = getWind(0).toFixed(1);
-      wind.innerHTML = `Wind: ${getWind(0).toFixed(1)} ${
-        unit === "metric" ? `m/s` : "mph"
-      }`;
+
+      setTimeout(() => {
+        wind.innerHTML = `Wind: ${getWind(0).toFixed(1)} ${
+          unit === "metric" ? `m/s` : "mph"
+        }`;
+      }, refresh_time + 115);
 
       let humidity = document.getElementById("humidity");
-      humidity.innerHTML = `Humidity: ${getHumidity(0)}%`;
+
+      setTimeout(() => {
+        humidity.innerHTML = `Humidity: ${getHumidity(0)}%`;
+      }, refresh_time + 120);
 
       let country = data.city.country;
 
@@ -156,77 +188,82 @@ const callAPI = (forecast, city_input) => {
       }
 
       // weather forecast for tomorrow
-      document.getElementById("day-2-temp-min").innerHTML = `${getTempMin(
-        7
-      ).toFixed(1)}°`;
-      document.getElementById("day-2-temp-max").innerHTML = `${getTempMax(
-        7
-      ).toFixed(1)}°`;
-      document.getElementById("day-2-date").innerHTML = getDate(7);
-      document.getElementById(
-        "day-2-icon"
-      ).src = `http://openweathermap.org/img/wn/${getIcon(7)}@2x.png`;
+      setTimeout(() => {
+        document.getElementById("day-2-temp-min").innerHTML = `${getTempMin(
+          7
+        ).toFixed(1)}°`;
+        document.getElementById("day-2-temp-max").innerHTML = `${getTempMax(
+          7
+        ).toFixed(1)}°`;
+        document.getElementById("day-2-date").innerHTML = getDate(7);
+        document.getElementById(
+          "day-2-icon"
+        ).src = `http://openweathermap.org/img/wn/${getIcon(7)}@2x.png`;
 
-      // weather forecast for 2nd day
-      document.getElementById("day-3-temp-min").innerHTML = `${getTempMin(
-        15
-      ).toFixed(1)}°`;
-      document.getElementById("day-3-temp-max").innerHTML = `${getTempMax(
-        15
-      ).toFixed(1)}°`;
-      document.getElementById("day-3-date").innerHTML = getDate(15);
-      document.getElementById(
-        "day-3-icon"
-      ).src = `http://openweathermap.org/img/wn/${getIcon(15)}@2x.png`;
+        // weather forecast for 2nd day
+        document.getElementById("day-3-temp-min").innerHTML = `${getTempMin(
+          15
+        ).toFixed(1)}°`;
+        document.getElementById("day-3-temp-max").innerHTML = `${getTempMax(
+          15
+        ).toFixed(1)}°`;
+        document.getElementById("day-3-date").innerHTML = getDate(15);
+        document.getElementById(
+          "day-3-icon"
+        ).src = `http://openweathermap.org/img/wn/${getIcon(15)}@2x.png`;
 
-      // weather forecast for 3nd day
-      document.getElementById("day-4-temp-min").innerHTML = `${getTempMin(
-        23
-      ).toFixed(1)}°`;
-      document.getElementById("day-4-temp-max").innerHTML = `${getTempMax(
-        23
-      ).toFixed(1)}°`;
-      document.getElementById("day-4-date").innerHTML = getDate(23);
-      document.getElementById(
-        "day-4-icon"
-      ).src = `http://openweathermap.org/img/wn/${getIcon(23)}@2x.png`;
+        // weather forecast for 3nd day
+        document.getElementById("day-4-temp-min").innerHTML = `${getTempMin(
+          23
+        ).toFixed(1)}°`;
+        document.getElementById("day-4-temp-max").innerHTML = `${getTempMax(
+          23
+        ).toFixed(1)}°`;
+        document.getElementById("day-4-date").innerHTML = getDate(23);
+        document.getElementById(
+          "day-4-icon"
+        ).src = `http://openweathermap.org/img/wn/${getIcon(23)}@2x.png`;
 
-      // weather forecast for 4nd day
-      document.getElementById("day-5-temp-min").innerHTML = `${getTempMin(
-        31
-      ).toFixed(1)}°`;
-      document.getElementById("day-5-temp-max").innerHTML = `${getTempMax(
-        31
-      ).toFixed(1)}°`;
-      document.getElementById("day-5-date").innerHTML = getDate(31);
-      document.getElementById(
-        "day-5-icon"
-      ).src = `http://openweathermap.org/img/wn/${getIcon(31)}@2x.png`;
+        // weather forecast for 4nd day
+        document.getElementById("day-5-temp-min").innerHTML = `${getTempMin(
+          31
+        ).toFixed(1)}°`;
+        document.getElementById("day-5-temp-max").innerHTML = `${getTempMax(
+          31
+        ).toFixed(1)}°`;
+        document.getElementById("day-5-date").innerHTML = getDate(31);
+        document.getElementById(
+          "day-5-icon"
+        ).src = `http://openweathermap.org/img/wn/${getIcon(31)}@2x.png`;
 
-      // weather forecast for 5nd day
-      document.getElementById("day-6-temp-min").innerHTML = `${getTempMin(
-        39
-      ).toFixed(1)}°`;
-      document.getElementById("day-6-temp-max").innerHTML = `${getTempMax(
-        39
-      ).toFixed(1)}°`;
-      document.getElementById("day-6-date").innerHTML = getDate(39);
-      document.getElementById(
-        "day-6-icon"
-      ).src = `http://openweathermap.org/img/wn/${getIcon(39)}@2x.png`;
-
+        // weather forecast for 5nd day
+        document.getElementById("day-6-temp-min").innerHTML = `${getTempMin(
+          39
+        ).toFixed(1)}°`;
+        document.getElementById("day-6-temp-max").innerHTML = `${getTempMax(
+          39
+        ).toFixed(1)}°`;
+        document.getElementById("day-6-date").innerHTML = getDate(39);
+        document.getElementById(
+          "day-6-icon"
+        ).src = `http://openweathermap.org/img/wn/${getIcon(39)}@2x.png`;
+      }, refresh_time + 120);
       let icon = document.getElementById("icon");
       // icon.src = `img/04n@2x.png`;
       // icon.src = `http://openweathermap.org/img/wn/${getIcon(0)}@2x.png`;
 
-      let image = document.getElementById("icon");
-      let downloadingImage = new Image();
-      downloadingImage.onload = function() {
-        image.src = this.src;
-      };
-      downloadingImage.src = `http://openweathermap.org/img/wn/${getIcon(
-        0
-      )}@2x.png`;
+      setTimeout(() => {
+        let image = document.getElementById("icon");
+        image.style.display = "inline-block";
+        let downloadingImage = new Image();
+        downloadingImage.onload = function() {
+          image.src = this.src;
+        };
+
+        downloadingImage.src = `http://openweathermap.org/img/wn/${getIcon(
+          0
+        )}@2x.png`;
+      }, refresh_time);
 
       setTimeout(() => {
         document.getElementById("turning_circle").className = "turn";
@@ -285,21 +322,15 @@ celsius.addEventListener("click", () => {
   let city_input = document.getElementById("city_input").value;
   city_input = document.getElementById("city_input").value;
 
-  console.log("-------------" + city_input.indexOf(","));
+  console.log("-------------" + city_input);
   city_input.slice(0, 2);
-  console.log(city_input);
-
-  let string_1 = "halli hallo";
-  console.log("TEST STRING: " + string_1.slice(0, 2));
-
-  console.log(city);
 
   let forecast = "";
   // city_input != ""
   //   ? (forecast = url + city_input + "&units=" + unit + apiKey)
   //   : (forecast = url + city + "&units=" + unit + apiKey);
 
-  forecast = url + city + "&units=" + unit + apiKey;
+  forecast = url + city_input + "&units=" + unit + apiKey;
   console.log(forecast);
 
   callAPI(forecast);
@@ -320,7 +351,7 @@ imperial.addEventListener("click", () => {
   // city_input != ""
   //   ? (forecast = url + city_input + "&units=" + unit + apiKey)
   //   : (forecast = url + city + "&units=" + unit + apiKey);
-  forecast = url + city + "&units=" + unit + apiKey;
+  forecast = url + city_input + "&units=" + unit + apiKey;
 
   console.log(city_input);
 

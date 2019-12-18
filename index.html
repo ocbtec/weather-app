@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Exo+2:100,100i,200,200i,300,300i,400,400i,500,500i&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
     <title>Weather App</title>
   </head>
@@ -41,7 +45,17 @@
           <img id="background_img" src="img/circle.svg" />
           <img id="turning_circle" src="img/circle_2.svg" />
           <div id="weather_data">
-            <div id="temp"></div>
+            <div id="temp">
+              <div class="temp-box">
+                <span id="temp-value"></span>
+                <span id="temp-symbol"></span>
+              </div>
+              <div class="feels-like-temp-box">
+                <span id="feels-like-temp"></span>
+                <span id="feels-like-temp-symbol"></span>
+              </div>
+            </div>
+
             <div id="temp_min"></div>
             <div id="temp_max"></div>
             <div id="icon-container">
