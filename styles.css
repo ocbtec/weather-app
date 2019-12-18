@@ -50,9 +50,9 @@ h1 {
 
 #search {
   display: flex;
-  width: 100%;
+  /* width: 100%;
   justify-content: space-around;
-  align-items: center;
+  align-items: center; */
 }
 
 #search_container {
@@ -89,6 +89,7 @@ button {
   justify-content: space-around;
   align-items: center;
   outline: none;
+  width: 30%;
 }
 
 #circle {
@@ -269,10 +270,13 @@ button {
   background-color: #537b78;
   color: white;
 }
-
 .buttonOff {
   background-color: #293d3b;
   color: #6f6f6f;
+}
+.buttonOn,
+.buttonOff {
+  width: 50%;
 }
 
 #not_found_container {
