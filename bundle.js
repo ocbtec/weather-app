@@ -1864,9 +1864,6 @@ const callAPI = (forecast, city_input) => {
       let humidity = document.getElementById("humidity");
       humidity.innerHTML = `Humidity: ${getHumidity(0)}%`;
 
-      let icon = document.getElementById("icon");
-      icon.src = `http://openweathermap.org/img/wn/${getIcon(0)}@2x.png`;
-
       let country = data.city.country;
 
       // use last city as fallback for input field
@@ -1936,12 +1933,25 @@ const callAPI = (forecast, city_input) => {
         "day-6-icon"
       ).src = `http://openweathermap.org/img/wn/${getIcon(39)}@2x.png`;
 
-      // console.log(`Forecast for ${getDate(24)}: ${getTemp(24)} in ${capitalize(city)}`);
-      // console.log(`Forecast for ${getDate(16)}: ${getTemp(16)} in ${capitalize(city)}`);
-      // console.log(`Forecast for ${getDate(8)}: ${getTemp(8)} in ${capitalize(city)}`);
-      // console.log(`Forecast for ${getDate(0)}: ${getTemp(0)} in ${capitalize(city)}`);
+      let icon = document.getElementById("icon");
+      // icon.src = `img/04n@2x.png`;
+      // icon.src = `http://openweathermap.org/img/wn/${getIcon(0)}@2x.png`;
 
-      // console.log(getCurrentTime(39));
+      let image = document.getElementById("icon");
+      let downloadingImage = new Image();
+      downloadingImage.onload = function() {
+        image.src = this.src;
+      };
+      downloadingImage.src = `http://openweathermap.org/img/wn/${getIcon(
+        0
+      )}@2x.png`;
+
+      setTimeout(() => {
+        document.getElementById("turning_circle").className = "turn";
+      }, 200);
+      setTimeout(() => {
+        document.getElementById("turning_circle").className = "";
+      }, 1700);
     })
     .catch(error => {
       city_input.value = `${data.city.name}, ${data.city.country}`;
@@ -1963,8 +1973,6 @@ const callAPI = (forecast, city_input) => {
   // clear search input
   city_input != undefined && (city_input.value = "");
   // console.log("CITY: " + city_input.value);
-
-  console.log("CITY: " + city);
 
   // hide mobile keyboard after input
   hideVirtualKeyboard();
