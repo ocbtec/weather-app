@@ -2,16 +2,17 @@
   margin: 0;
   padding: 0;
   font-family: "Exo 2", sans-serif;
+  text-shadow: 1px 1px 1px #616161;
 }
 
 html {
   height: 100vh;
-  background: url(img/background_cloudy.jpg) no-repeat;
+  background: url(img/background_cloudy_2.jpg) no-repeat;
   -webkit-background-size: 1000px 1000px;
   -moz-background-size: 1000px 1000px;
   -o-background-size: 1000px 1000px;
-  background-size: 1000px 1000px;
-  background-position: 67% 50%;
+  background-size: 800px 800px;
+  background-position: 70% 40%;
 }
 
 body {
@@ -100,6 +101,7 @@ button {
   display: block;
   width: 80%;
   margin: 0 auto;
+  opacity: 0.6;
 }
 #turning_circle {
   position: absolute;
@@ -193,7 +195,7 @@ button {
 
 #temp_min,
 #temp_max {
-  font-size: 16pt;
+  font-size: 15pt;
 }
 
 #overcast,
@@ -239,19 +241,51 @@ button {
   transform: translate(-50%, -50%);
 }
 
+#slide-container {
+  position: relative;
+  overflow: scroll;
+  height: 100%;
+}
+
 #forecast-container {
   display: flex;
   align-items: center;
   background-color: #ffffff00;
   overflow: scroll;
+  height: 100%;
+  width: 100%;
+  background-color: #757d8aa6;
 }
 .forecast {
-  width: 25%;
+  width: 33.3%;
   height: 100%;
-  background-color: #697b9659;
   flex: 0 0 auto;
+  border-right: 1px solid #ffffff5c;
 }
-
+.arrow-left-container {
+  position: absolute;
+  left: 6px;
+  width: 2.5%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+#arrow-left {
+  height: 50px;
+}
+.arrow-right-container {
+  position: absolute;
+  top: 0;
+  right: 6px;
+  width: 2.5%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+#arrow-right {
+  position: absolute;
+  height: 50px;
+}
 .temp_unit_class {
   vertical-align: -webkit-baseline-middle;
   background-color: #163516;
@@ -347,10 +381,16 @@ button {
   grid-template-rows: 25% 50% 25%;
   grid-template-columns: 1fr 1fr;
 }
+#day-6 {
+  border: none;
+}
 .icons {
   grid-row: 2;
   grid-column: 1 / 3;
   align-self: center;
+  margin: 0 auto;
+  display: block;
+  width: 80%;
 }
 .dates {
   grid-row: 1;
@@ -358,23 +398,27 @@ button {
   text-align: center;
   align-self: center;
   color: #f7ddb6;
+  font-size: 14pt;
 }
 .min-temps,
 .max-temps {
   grid-row: 3;
-  text-align: center;
-  font-size: 10pt;
+  font-size: 14pt;
   align-self: center;
   color: #402b0d;
+  text-shadow: 1px 1px 1px #616161;
 }
 .min-temps {
   grid-column: 1 / 2;
-  border-right: 1px solid #cccccc;
-  color: #1a204a;
+  color: #2e6392;
+  text-align: left;
+  margin-left: 10px;
 }
 .max-temps {
   grid-column: 2 / 3;
-  color: #421616;
+  color: #a73a3a;
+  text-align: right;
+  margin-right: 10px;
 }
 
 @media screen and (orientation: landscape) {

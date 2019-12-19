@@ -589,26 +589,6 @@
        y2="153.06551" />
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#linearGradient1096"
-       id="linearGradient1137"
-       gradientUnits="userSpaceOnUse"
-       x1="551.41644"
-       y1="294.15417"
-       x2="551.41644"
-       y2="153.06551"
-       gradientTransform="translate(-1.0053988,-1.1988177)" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient1096"
-       id="linearGradient1145"
-       gradientUnits="userSpaceOnUse"
-       x1="551.41644"
-       y1="294.15417"
-       x2="551.41644"
-       y2="153.06551"
-       gradientTransform="translate(-1.0053988,-1.1988177)" />
-    <linearGradient
-       inkscape:collect="always"
        xlink:href="#linearGradient1653"
        id="linearGradient1657"
        x1="26.489695"
@@ -741,9 +721,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5"
-     inkscape:cx="79.158945"
-     inkscape:cy="482.57165"
+     inkscape:zoom="4"
+     inkscape:cx="525.59052"
+     inkscape:cy="491.09889"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -781,7 +761,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1017,13 +997,13 @@
          y="157.86891"
          style="fill:#e6e6e6;fill-opacity:1;stroke-width:0.26458332">E</tspan></text>
     <circle
-       style="opacity:1;fill:url(#linearGradient1137);fill-opacity:1;stroke:#ffffff;stroke-width:0.26458332;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="opacity:1;fill:#3e2706;fill-opacity:1;stroke:#ffffff;stroke-width:0.26458332;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path143-7"
        cx="550.11102"
        cy="154.39757"
        r="7.1364956" />
     <circle
-       style="opacity:1;fill:url(#linearGradient1145);fill-opacity:1;stroke:#ffffff;stroke-width:0.19716762;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1144-3)"
+       style="opacity:1;fill:#353535;fill-opacity:1;stroke:#ffffff;stroke-width:0.19716762;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1144-3)"
        id="path143-2-2"
        cx="550.11102"
        cy="154.39757"

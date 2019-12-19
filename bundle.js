@@ -1747,7 +1747,7 @@ let tmpDate = "";
 let unit = "metric";
 let city = "Berlin";
 
-let refresh_time = 1400;
+let refresh_time = 1000;
 
 let data = "";
 
@@ -1867,12 +1867,12 @@ const callAPI = (forecast, city_input) => {
       let temp_max_string = getTempMax(0).toFixed(1);
 
       setTimeout(() => {
-        temp_min.innerHTML = `${temp_min_string}° <span id="tempMinSpan">Min</span>`;
-        document.getElementById("tempMinSpan").style.cssText =
-          "font-size: 12pt; color: #cccccc";
-        temp_max.innerHTML = `${temp_max_string}° <span id="tempMaxSpan">Max</span> `;
-        document.getElementById("tempMaxSpan").style.cssText =
-          "font-size: 12pt; color: #cccccc";
+        temp_min.innerHTML = `${temp_min_string}° <span id="temp-Min-Span">Min</span>`;
+        document.getElementById("temp-Min-Span").style.cssText =
+          "font-size: 12pt; color: #6ca1d0; text-shadow: 1px 1px 1px #616161;";
+        temp_max.innerHTML = `${temp_max_string}° <span id="temp-Max-Span">Max</span> `;
+        document.getElementById("temp-Max-Span").style.cssText =
+          "font-size: 12pt; color: #b94848; text-shadow: 1px 1px 1px #616161;";
       }, refresh_time + 100);
 
       let overcast = document.getElementById("overcast");
@@ -1985,7 +1985,7 @@ const callAPI = (forecast, city_input) => {
 
       setTimeout(() => {
         document.getElementById("turning_circle").classList.add("turn");
-      }, 500);
+      }, 300);
 
       let animate_circle = document.getElementById("turning_circle");
       animate_circle.addEventListener("animationend", () => {
@@ -2017,7 +2017,7 @@ const callAPI = (forecast, city_input) => {
   hideVirtualKeyboard();
   setTimeout(() => {
     document.getElementById(
-      "forecast-container"
+      "slide-container"
     ).style.cssText = `transform: translate(0,0)`;
   }, 200);
 };
@@ -2106,7 +2106,7 @@ document.getElementById("city_input").addEventListener("click", () => {
       navigator.userAgent
     )
   ) {
-    document.getElementById("forecast-container").style.transform =
+    document.getElementById("slide-container").style.transform =
       "translate(0px, 300px)";
   }
 });
