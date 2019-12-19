@@ -1747,7 +1747,7 @@ let tmpDate = "";
 let unit = "metric";
 let city = "Berlin";
 
-let refresh_time = 1000;
+let refresh_time = 1400;
 
 let data = "";
 
@@ -1984,11 +1984,13 @@ const callAPI = (forecast, city_input) => {
       }, refresh_time);
 
       setTimeout(() => {
-        document.getElementById("turning_circle").className = "turn";
-      }, 200);
-      setTimeout(() => {
-        document.getElementById("turning_circle").className = "";
-      }, 1700);
+        document.getElementById("turning_circle").classList.add("turn");
+      }, 500);
+
+      let animate_circle = document.getElementById("turning_circle");
+      animate_circle.addEventListener("animationend", () => {
+        animate_circle.classList.remove("turn");
+      });
     })
     .catch(error => {
       city_input.value = `${data.city.name}, ${data.city.country}`;
