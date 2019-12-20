@@ -20,7 +20,7 @@ const monthArray = [
   "Sep",
   "Oct",
   "Nov",
-  "Dez"
+  "Dec"
 ];
 
 let month = "";
