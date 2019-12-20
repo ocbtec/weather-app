@@ -149,11 +149,11 @@ const callAPI = (forecast, city_input) => {
       let temp_max_string = getTempMax(0).toFixed(1);
 
       setTimeout(() => {
-        temp_min.innerHTML = `${temp_min_string}° <span id="temp-Min-Span">Min</span>`;
-        document.getElementById("temp-Min-Span").style.cssText =
+        temp_min.innerHTML = `${temp_min_string}° <span id="temp-min-span">Min</span>`;
+        document.getElementById("temp-min-span").style.cssText =
           "font-size: 12pt; color: #6ca1d0; text-shadow: 1px 1px 1px #616161;";
-        temp_max.innerHTML = `${temp_max_string}° <span id="temp-Max-Span">Max</span> `;
-        document.getElementById("temp-Max-Span").style.cssText =
+        temp_max.innerHTML = `${temp_max_string}° <span id="temp-max-span">Max</span> `;
+        document.getElementById("temp-max-span").style.cssText =
           "font-size: 12pt; color: #b94848; text-shadow: 1px 1px 1px #616161;";
       }, refresh_time + 100);
 
@@ -265,10 +265,11 @@ const callAPI = (forecast, city_input) => {
         )}@2x.png`;
       }, refresh_time);
 
+      // start circle animation
       setTimeout(() => {
         document.getElementById("turning_circle").classList.add("turn");
       }, 300);
-
+      // remove circle animation
       let animate_circle = document.getElementById("turning_circle");
       animate_circle.addEventListener("animationend", () => {
         animate_circle.classList.remove("turn");
@@ -297,11 +298,17 @@ const callAPI = (forecast, city_input) => {
 
   // hide mobile keyboard after input
   hideVirtualKeyboard();
-  setTimeout(() => {
-    document.getElementById(
-      "slide-container"
-    ).style.cssText = `transform: translate(0,0)`;
-  }, 200);
+
+  mobile_layout();
+};
+
+const mobile_layout = () => {
+  let circle = document.getElementById("circle");
+  let slide_container = document.getElementById("slide-container");
+  circle.style.margin = "20px 0";
+  slide_container.style.display = "block";
+
+  window.scrollTo(0, 1);
 };
 
 // loading Berlin as default
@@ -321,8 +328,8 @@ celsius.addEventListener("click", () => {
   celsius.classList.remove("buttonOff");
   imperial.classList.remove("buttonOn");
 
-  let city_input = document.getElementById("city_input").value;
-  city_input = document.getElementById("city_input").value;
+  let city_input = document.getElementById("city-input").value;
+  city_input = document.getElementById("city-input").value;
 
   console.log("-------------" + city_input);
   city_input.slice(0, 2);
@@ -346,8 +353,8 @@ imperial.addEventListener("click", () => {
   imperial.classList.remove("buttonOff");
   celsius.classList.remove("buttonOn");
 
-  let city_input = document.getElementById("city_input").value;
-  city_input = document.getElementById("city_input").value;
+  let city_input = document.getElementById("city-input").value;
+  city_input = document.getElementById("city-input").value;
 
   let forecast = "";
   // city_input != ""
@@ -364,17 +371,17 @@ imperial.addEventListener("click", () => {
 
 // let search_button = document.getElementById("search_button");
 // search_button.addEventListener("click", () => {
-//   let city_input = document.getElementById("city_input");
+//   let city_input = document.getElementById("city-input");
 //   if (city_input.value != "") {
 //     let forecast = url + city_input.value + "&units=" + unit + apiKey;
 //     callAPI(forecast, city_input);
 //   }
 // });
 
-document.querySelector("#city_input").addEventListener("keypress", function(e) {
+document.querySelector("#city-input").addEventListener("keypress", function(e) {
   let key = e.which || e.keyCode;
   if (key === 13) {
-    let city_input = document.getElementById("city_input");
+    let city_input = document.getElementById("city-input");
     if (city_input.value != "") {
       let forecast = url + city_input.value + "&units=" + unit + apiKey;
       callAPI(forecast, city_input);
@@ -382,14 +389,47 @@ document.querySelector("#city_input").addEventListener("keypress", function(e) {
   }
 });
 
-document.getElementById("city_input").addEventListener("click", () => {
+// attribute settings for open keyboard on mobile phones
+const mobile_keyboard_open = () => {
+  let circle = document.getElementById("circle");
+  let slide_container = document.getElementById("slide-container");
+  circle.style.margin = "5% 0%";
+  slide_container.style.display = "none";
+};
+
+// attribute settings back to mobile view without keyboard
+const close_mobile_keyboard = () => {
+  setTimeout(() => {
+    var grid = document.getElementById("grid-selector");
+    var except = document.getElementById("city-input");
+    grid.addEventListener(
+      "click",
+      () => {
+        mobile_layout();
+      },
+      false
+    );
+    except.addEventListener(
+      "click",
+      ev => {
+        null;
+        ev.stopPropagation(); //this is important! If removed, you'll get both alerts
+      },
+      false
+    );
+  }, 100);
+};
+
+document.getElementById("city-input").addEventListener("click", () => {
   if (
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent
     )
   ) {
-    document.getElementById("slide-container").style.transform =
-      "translate(0px, 300px)";
+    // attribute settings for open keyboard on mobile phones
+    mobile_keyboard_open();
+
+    close_mobile_keyboard();
   }
 });
 

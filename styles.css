@@ -12,7 +12,7 @@ html {
   -moz-background-size: 1000px 1000px;
   -o-background-size: 1000px 1000px;
   background-size: 800px 800px;
-  background-position: 70% 40%;
+  background-position: 70% 70%;
 }
 
 body {
@@ -21,34 +21,46 @@ body {
 
 .grid {
   display: grid;
-  grid-template-rows: 10% 70% 20%;
-  height: 100%;
+  grid-template-rows: 60px 50px auto 100px;
+  height: 100vh;
 }
 
 header {
-  padding: 10px;
   background-color: #4e5a6fcc;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+
+  grid-row: 1;
+  width: 100%;
 }
 
 h1 {
   color: #eca335;
+  padding-left: 30px;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 }
 
 #logo {
   width: 12%;
+  padding-right: 30px;
 }
 
 #main {
   position: relative;
   display: inline-block;
   width: 100%;
+
+  grid-row: 3;
 }
 
 #search {
+  position: relative;
   display: flex;
+  grid-row: 2;
   /* width: 100%;
   justify-content: space-around;
   align-items: center; */
@@ -59,16 +71,14 @@ h1 {
   width: 100%;
 }
 
-#city_input {
+#city-input {
   border-style: none;
   outline: none;
-  height: 40px;
   width: 100%;
   color: white;
   background-color: #263954a8;
   opacity: 0.5;
   font-size: 16pt;
-  padding: 4px;
   padding-left: 45px;
 }
 
@@ -93,7 +103,7 @@ button {
 
 #circle {
   position: relative;
-  margin-top: 12%;
+  margin: 20px 0;
   overflow: hidden;
 }
 
@@ -112,7 +122,6 @@ button {
   left: 0;
   right: 0;
   transform: rotate(0deg);
-  /* animation: wind-animation 2.3s 1.5s linear 1; */
 }
 .turn {
   position: absolute;
@@ -173,10 +182,6 @@ button {
   position: relative;
   top: -18px;
   font-size: 12pt;
-}
-.feels-like-temp-box {
-  width: 50%;
-  margin: 0 auto;
 }
 #feels-like-temp {
   font-size: 10pt;
@@ -242,11 +247,23 @@ button {
 }
 
 #slide-container {
+  grid-row: 4;
   position: relative;
   overflow: scroll;
   height: 100%;
 }
 
+/* .long-term-forecast {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: #757d8aa6;
+  color: #fff9f1;
+  border-bottom: 1px solid #ffffff5c;
+  padding-left: 10px;
+}
+#five-day-forecast {
+} */
 #forecast-container {
   display: flex;
   align-items: center;
@@ -290,8 +307,8 @@ button {
   vertical-align: -webkit-baseline-middle;
   background-color: #163516;
   width: 40px;
-  height: 48px;
-  line-height: 48px;
+  height: 100%;
+  line-height: 50px;
   text-align: center;
 }
 
@@ -397,13 +414,14 @@ button {
   grid-column: 1 / 3;
   text-align: center;
   align-self: center;
-  color: #f7ddb6;
+  color: #fff9f1;
   font-size: 14pt;
 }
 .min-temps,
 .max-temps {
   grid-row: 3;
   font-size: 14pt;
+  font-weight: 400;
   align-self: center;
   color: #402b0d;
   text-shadow: 1px 1px 1px #616161;
@@ -421,10 +439,16 @@ button {
   margin-right: 10px;
 }
 
-@media screen and (orientation: landscape) {
+/* @media screen and (orientation: landscape) {
   @media screen and (min-width: 500px) {
     #background_img {
       width: 20%;
     }
+  }
+} */
+
+@media screen and (max-width: 350) {
+  h1 {
+    color: red;
   }
 }
