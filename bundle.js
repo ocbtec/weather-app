@@ -1795,14 +1795,44 @@ const callAPI = (forecast, city_input) => {
       };
 
       const getTempMin = num => {
-        let day = num;
-        let temp = data.list[day].main.temp_min;
+        let temperatures = num;
+        let temp_values = [];
+
+        if (num != 0) {
+          for (let i = 0; i < 8; i++) {
+            temp_values.push(data.list[temperatures].main.temp_min);
+            console.log(temperatures);
+            temperatures--;
+          }
+          temp = Math.min(...temp_values);
+        } else {
+          let day = num;
+          temp = data.list[day].main.temp_min;
+          return temp;
+        }
         return temp;
       };
 
       const getTempMax = num => {
-        let day = num;
-        let temp = data.list[day].main.temp_max;
+        // let day = num;
+        // let temp = data.list[day].main.temp_max;
+        // return temp;
+
+        let temperatures = num;
+        let temp_values = [];
+
+        if (num != 0) {
+          for (let i = 0; i < 8; i++) {
+            temp_values.push(data.list[temperatures].main.temp_max);
+            console.log(temperatures);
+            temperatures--;
+          }
+          temp = Math.max(...temp_values);
+        } else {
+          let day = num;
+          temp = data.list[day].main.temp_max;
+          return temp;
+        }
         return temp;
       };
 
