@@ -79,29 +79,26 @@ const callAPI = (forecast, city_input) => {
       const getTempMin = num => {
         let temperatures = num;
         let temp_values = [];
+        let temp;
 
         if (num != 0) {
           for (let i = 0; i < 8; i++) {
             temp_values.push(data.list[temperatures].main.temp_min);
-            console.log(temperatures);
             temperatures--;
           }
           temp = Math.min(...temp_values);
         } else {
           let day = num;
-          temp = data.list[day].main.temp_min;
+          temp = data.list[0].main.temp_min;
           return temp;
         }
         return temp;
       };
 
       const getTempMax = num => {
-        // let day = num;
-        // let temp = data.list[day].main.temp_max;
-        // return temp;
-
         let temperatures = num;
         let temp_values = [];
+        let temp;
 
         if (num != 0) {
           for (let i = 0; i < 8; i++) {
@@ -112,7 +109,7 @@ const callAPI = (forecast, city_input) => {
           temp = Math.max(...temp_values);
         } else {
           let day = num;
-          temp = data.list[day].main.temp_max;
+          temp = data.list[0].main.temp_max;
           return temp;
         }
         return temp;
@@ -150,7 +147,6 @@ const callAPI = (forecast, city_input) => {
 
       let temp = document.getElementById("temp-value");
       let temp_string = getTemp(0).toFixed(1);
-
       setTimeout(() => {
         temp.innerHTML = temp_string;
       }, refresh_time);
