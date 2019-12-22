@@ -107,7 +107,7 @@ button {
   overflow: hidden;
 }
 
-#background_img {
+#background-img {
   display: block;
   width: 80%;
   margin: 0 auto;
@@ -439,16 +439,10 @@ button {
   margin-right: 10px;
 }
 
-/* @media screen and (orientation: landscape) {
-  @media screen and (min-width: 500px) {
-    #background_img {
-      width: 20%;
-    }
-  }
-} */
-
-@media screen and (max-width: 350) {
-  h1 {
-    color: red;
+/* @media screen and (orientation: portrait) { */
+/* } */
+@media screen and (min-width: 500px) {
+  #background-img {
+    width: 50%;
   }
 }

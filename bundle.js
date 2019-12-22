@@ -1693,18 +1693,6 @@ module.exports = function isBuffer (obj) {
 }
 
 },{}],28:[function(require,module,exports){
-module.exports = function (string) {
-  string = string.toLowerCase();
-  return string.charAt(0).toUpperCase() + string.substring(1);
-}
-
-module.exports.words = function (string) {
-  return string.toLowerCase().replace(/(^|[^a-zA-Z\u00C0-\u017F'])([a-zA-Z\u00C0-\u017F])/g, function (m) {
-    return m.toUpperCase()
-  })
-}
-
-},{}],29:[function(require,module,exports){
 
 /**
  * hide-virtual-keyboard - Hides virtual keyboard on a real mobile device
@@ -1715,16 +1703,13 @@ module.exports.words = function (string) {
  * @license MIT
  */
 (function webpackUniversalModuleDefinition(root,factory){if(typeof exports==="object"&&typeof module==="object")module.exports=factory();else if(typeof define==="function"&&define.amd)define([],factory);else if(typeof exports==="object")exports["hideVirtualKeyboard"]=factory();else root["hideVirtualKeyboard"]=factory()})(this,function(){return function(modules){var installedModules={};function __webpack_require__(moduleId){if(installedModules[moduleId])return installedModules[moduleId].exports;var module=installedModules[moduleId]={exports:{},id:moduleId,loaded:false};modules[moduleId].call(module.exports,module,module.exports,__webpack_require__);module.loaded=true;return module.exports}__webpack_require__.m=modules;__webpack_require__.c=installedModules;__webpack_require__.p="";return __webpack_require__(0)}([function(module,exports){"use strict";module.exports=function hideVirtualKeyboard(){if(document.activeElement&&document.activeElement.blur&&typeof document.activeElement.blur==="function"){document.activeElement.blur()}}}])});
-},{}],30:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 const axios = require("axios");
-let capitalize = require("capitalize");
 let hideVirtualKeyboard = require("hide-virtual-keyboard");
 // let countryCodeLookup = require("country-code-lookup");
 
 let url = `https://api.openweathermap.org/data/2.5/forecast?q=`;
 const apiKey = `&APPID=d84a3b5a1d8ffa8e702549aec5e6ec79`;
-
-// const [city = "berlin", unit = "metric", forecast = url + city + "&units=" + unit + apiKey] = process.argv.slice(2);
 
 const monthArray = [
   "Jan",
@@ -1747,6 +1732,7 @@ let tmpDate = "";
 let unit = "metric";
 let city = "Berlin";
 
+// for delay when displaying weather data
 let refresh_time = 1000;
 
 let data = "";
@@ -1755,11 +1741,11 @@ const callAPI = (forecast, city_input) => {
   axios
     .get(forecast)
     .then(response => {
-      // console.log("city at api start" + city_input);
-
       data = response.data;
+      console.log(response);
+      console.log(response.data);
 
-      // get month and day from the weather API
+      // get month and day
       const getDate = num => {
         let day = num;
         tmpDate = data.list[day].dt_txt.slice(5, 10);
@@ -1767,33 +1753,19 @@ const callAPI = (forecast, city_input) => {
         month = monthArray[tmpDate.slice(0, 2) - 1];
         return `${month} ${day}`;
       };
-
-      // const getCurrentTime = num => {
-      //   let day = 39 - num;
-      //   let time = data.list[day].dt_txt.slice(5, 10);
-      //   console.log("TEST ---------------------------------");
-      //   console.log(time);
-
-      //   // .slice(5, 10);
-      //   // time = tmpTime.slice(3, 5);
-      //   // month = monthArray[tmpTime.slice(0, 2) - 1];
-
-      //   return null;
-      // };
-
-      // get temperature from weather API
+      // get current temperature
       const getTemp = num => {
         let day = num;
         let temp = data.list[day].main.temp;
         return temp;
       };
-
+      // get feels-like-temperature
       const getFeelsLikeTemp = num => {
         let day = num;
         let temp = data.list[day].main.feels_like;
         return temp;
       };
-
+      // get min-temperature
       const getTempMin = num => {
         let temperatures = num;
         let temp_values = [];
@@ -1812,7 +1784,7 @@ const callAPI = (forecast, city_input) => {
         }
         return temp;
       };
-
+      // get max-temperature
       const getTempMax = num => {
         let temperatures = num;
         let temp_values = [];
@@ -1832,43 +1804,39 @@ const callAPI = (forecast, city_input) => {
         }
         return temp;
       };
-
+      // get weather description
       const getOvercast = num => {
         let day = num;
         let temp = data.list[day].weather[0].description;
         return temp;
       };
-
+      // get wind speed
       const getWind = num => {
         let day = num;
         let temp = data.list[day].wind.speed;
         return temp;
       };
-
-      const getWindDirection = num => {
-        let day = num;
-        let wind = data.list[day].wind.deg;
-        return wind;
-      };
-
+      // get humidity
       const getHumidity = num => {
         let day = num;
         let temp = data.list[day].main.humidity;
         return temp;
       };
-
+      // get icon accordingly to weather
       const getIcon = num => {
         let day = num;
         let icon = data.list[day].weather[0].icon;
         return icon;
       };
 
+      // write current temp to dom
       let temp = document.getElementById("temp-value");
       let temp_string = getTemp(0).toFixed(1);
       setTimeout(() => {
         temp.innerHTML = temp_string;
       }, refresh_time);
 
+      // write temp unit accordingly to choice to dom
       let temp_symbol = document.getElementById("temp-symbol");
       temp_symbol.style.color = "#cccccc";
       setTimeout(() => {
@@ -1879,19 +1847,18 @@ const callAPI = (forecast, city_input) => {
         }
       }, refresh_time);
 
+      // write feels-like-temp to dom
       let feels_like_temp = document.getElementById("feels-like-temp");
       let feels_like_temp_string = getFeelsLikeTemp(0).toFixed(1);
-
       setTimeout(() => {
         feels_like_temp.innerHTML = `Feels like <span id="feels-like-temp-value">${feels_like_temp_string}°</span>`;
       }, refresh_time + 50);
 
+      // write min and max temp to dom
       let temp_min = document.getElementById("temp_min");
       let temp_min_string = getTempMin(0).toFixed(1);
-
       let temp_max = document.getElementById("temp_max");
       let temp_max_string = getTempMax(0).toFixed(1);
-
       setTimeout(() => {
         temp_min.innerHTML = `${temp_min_string}° <span id="temp-min-span">Min</span>`;
         document.getElementById("temp-min-span").style.cssText =
@@ -1901,30 +1868,28 @@ const callAPI = (forecast, city_input) => {
           "font-size: 12pt; color: #b94848; text-shadow: 1px 1px 1px #616161;";
       }, refresh_time + 100);
 
+      // write weather description to dom
       let overcast = document.getElementById("overcast");
-
       setTimeout(() => {
         overcast.innerHTML = getOvercast(0);
       }, refresh_time + 110);
 
+      // write wind speed to dom
       let wind = document.getElementById("wind");
-      let wind_string = getWind(0).toFixed(1);
-
       setTimeout(() => {
         wind.innerHTML = `Wind: ${getWind(0).toFixed(1)} ${
           unit === "metric" ? `m/s` : "mph"
         }`;
       }, refresh_time + 115);
 
+      // write humidity temp to dom
       let humidity = document.getElementById("humidity");
-
       setTimeout(() => {
         humidity.innerHTML = `Humidity: ${getHumidity(0)}%`;
       }, refresh_time + 120);
 
-      let country = data.city.country;
-
       // use last city as fallback for input field
+      let country = data.city.country;
       if (city_input !== undefined) {
         city_input.value = `${
           city_input == undefined ? "Berlin" : data.city.name
@@ -1992,10 +1957,8 @@ const callAPI = (forecast, city_input) => {
           "day-6-icon"
         ).src = `http://openweathermap.org/img/wn/${getIcon(39)}@2x.png`;
       }, refresh_time + 120);
-      let icon = document.getElementById("icon");
-      // icon.src = `img/04n@2x.png`;
-      // icon.src = `http://openweathermap.org/img/wn/${getIcon(0)}@2x.png`;
 
+      // write icon to dom
       setTimeout(() => {
         let image = document.getElementById("icon");
         image.style.display = "inline-block";
@@ -2003,7 +1966,6 @@ const callAPI = (forecast, city_input) => {
         downloadingImage.onload = function() {
           image.src = this.src;
         };
-
         downloadingImage.src = `http://openweathermap.org/img/wn/${getIcon(
           0
         )}@2x.png`;
@@ -2025,34 +1987,31 @@ const callAPI = (forecast, city_input) => {
       let error_msg_box = document.getElementById("not_found_container");
       error_msg_box.style.display = "flex";
 
-      let error_close = document.getElementById("not_found_icon");
-
       document.addEventListener("click", () => {
         error_msg_box.style.display = "none";
       });
-      // error_close.addEventListener("click", () => {
-      //   error_msg_box.style.display = "none";
-      // });
+
       console.log(error);
     });
 
   // clear search input
   city_input != undefined && (city_input.value = "");
-  // console.log("CITY: " + city_input.value);
 
   // hide mobile keyboard after input
   hideVirtualKeyboard();
 
+  // set mobile layout to standard (keyboard closed)
   mobile_layout();
 };
 
+// set mobile layout to standard (keyboard closed)
 const mobile_layout = () => {
   let circle = document.getElementById("circle");
   let slide_container = document.getElementById("slide-container");
   circle.style.margin = "20px 0";
   slide_container.style.display = "block";
 
-  window.scrollTo(0, 1);
+  window.scrollTo(0, 1); // macht das was???
 };
 
 // loading Berlin as default
@@ -2061,55 +2020,31 @@ let forecast = url + city + "&units=" + unit + apiKey;
 // display_city.innerHTML = `Berlin, DE`;
 callAPI(forecast);
 
+// change units to metric
 let celsius = document.getElementById("celsius");
 let imperial = document.getElementById("imperial");
-
 celsius.addEventListener("click", () => {
   unit = "metric";
-
   celsius.classList.add("buttonOn");
   imperial.classList.add("buttonOff");
   celsius.classList.remove("buttonOff");
   imperial.classList.remove("buttonOn");
-
   let city_input = document.getElementById("city-input").value;
-  city_input = document.getElementById("city-input").value;
-
-  console.log("-------------" + city_input);
   city_input.slice(0, 2);
-
   let forecast = "";
-  // city_input != ""
-  //   ? (forecast = url + city_input + "&units=" + unit + apiKey)
-  //   : (forecast = url + city + "&units=" + unit + apiKey);
-
   forecast = url + city_input + "&units=" + unit + apiKey;
-  console.log(forecast);
-
   callAPI(forecast);
 });
-
+// change units to imperial
 imperial.addEventListener("click", () => {
   unit = "imperial";
-
   imperial.classList.add("buttonOn");
   celsius.classList.add("buttonOff");
   imperial.classList.remove("buttonOff");
   celsius.classList.remove("buttonOn");
-
   let city_input = document.getElementById("city-input").value;
-  city_input = document.getElementById("city-input").value;
-
   let forecast = "";
-  // city_input != ""
-  //   ? (forecast = url + city_input + "&units=" + unit + apiKey)
-  //   : (forecast = url + city + "&units=" + unit + apiKey);
   forecast = url + city_input + "&units=" + unit + apiKey;
-
-  console.log(city_input);
-
-  console.log(forecast);
-
   callAPI(forecast);
 });
 
@@ -2122,6 +2057,7 @@ imperial.addEventListener("click", () => {
 //   }
 // });
 
+// create url with user input
 document.querySelector("#city-input").addEventListener("keypress", function(e) {
   let key = e.which || e.keyCode;
   if (key === 13) {
@@ -2157,13 +2093,14 @@ const close_mobile_keyboard = () => {
       "click",
       ev => {
         null;
-        ev.stopPropagation(); //this is important! If removed, you'll get both alerts
+        ev.stopPropagation();
       },
       false
     );
   }, 100);
 };
 
+// change layout, when keyboard is open on mobile devices
 document.getElementById("city-input").addEventListener("click", () => {
   if (
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
@@ -2177,23 +2114,4 @@ document.getElementById("city-input").addEventListener("click", () => {
   }
 });
 
-// const date1 = new Date("August 19, 1975 23:15:30 GMT+07:00");
-// console.log(date1.getTimezoneOffset());
-
-// var offset = -8;
-// let time = new Date(new Date().getTime() + offset * 3600 * 1000)
-//   .toUTCString()
-//   .replace(/ GMT$/, "");
-// console.log(time);
-
-// let seconds = TimeZone.current.secondsFromGMT();
-
-// let hours = seconds / 3600;
-// let minutes = abs(seconds / 60) % 60;
-
-// let tz = String((format = "%+.2d:%.2d"), hours, minutes);
-// console.log(tz);
-
-// print(tz); // "+01:00"
-
-},{"axios":2,"capitalize":28,"hide-virtual-keyboard":29}]},{},[30]);
+},{"axios":2,"hide-virtual-keyboard":28}]},{},[29]);
