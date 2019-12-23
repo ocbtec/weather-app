@@ -36,27 +36,6 @@ function callAPI(city) {
   console.log(forecast);
 
   return axios.get(forecast);
-  // .then(response => {
-  //   return response.data;
-
-  // temp = response.data;
-  // return response.data;
-  // return "API return";
-  // });
-  // .catch(error => {
-  //   city_input.value = `${data.city.name}, ${data.city.country}`;
-  //   console.error("City not found, try again ¯\\_(ツ)_/¯");
-  //   let error_msg_box = document.getElementById("not_found_container");
-  //   error_msg_box.style.display = "flex";
-
-  //   document.addEventListener("click", () => {
-  //     error_msg_box.style.display = "none";
-  //   });
-
-  //   console.log(error);
-  // });
-  // console.log("+s+s+s+s+ss+" + data);
-  // return temp;
 }
 
 //  /SERVER ********************************************
@@ -67,8 +46,7 @@ class WeatherData {
   constructor(city_input) {
     this.city_input = city_input;
     this.data = "";
-    // console.log(city_input);
-    // console.log(this.city_input);
+    this.use_metric = true;
   }
   update_weather_data(city_input) {
     // this.data = callAPI(city_input);
@@ -83,13 +61,20 @@ class WeatherData {
   // get current temperature
   getTemp(num) {
     let temp = this.data.list[num].main.temp;
-    return temp;
+    if (this.use_metric === true) {
+      return temp;
+    } else {
+      return celsius_to_fahrenheit(temp);
+    }
   }
   // get feels-like-temperature
   getFeelsLikeTemp(num) {
-    let day = num;
-    let temp = this.data.list[day].main.feels_like;
-    return temp;
+    let temp = this.data.list[num].main.feels_like;
+    if (this.use_metric === true) {
+      return temp;
+    } else {
+      return celsius_to_fahrenheit(temp);
+    }
   }
   // get min-temperature
   getTempMin(num) {
@@ -106,9 +91,12 @@ class WeatherData {
     } else {
       let day = num;
       temp = this.data.list[0].main.temp_min;
-      return temp;
     }
-    return temp;
+    if (this.use_metric === true) {
+      return temp;
+    } else {
+      return celsius_to_fahrenheit(temp);
+    }
   }
   // get max-temperature
   getTempMax(num) {
@@ -119,39 +107,43 @@ class WeatherData {
     if (num != 0) {
       for (let i = 0; i < 8; i++) {
         temp_values.push(this.data.list[temperatures].main.temp_max);
-        console.log(temperatures);
+
         temperatures--;
       }
       temp = Math.max(...temp_values);
     } else {
       let day = num;
       temp = this.data.list[0].main.temp_max;
-      return temp;
     }
-    return temp;
+    if (this.use_metric === true) {
+      return temp;
+    } else {
+      return celsius_to_fahrenheit(temp);
+    }
   }
   // get weather description
   getOvercast(num) {
-    let day = num;
-    let temp = this.data.list[day].weather[0].description;
+    let temp = this.data.list[num].weather[0].description;
     return temp;
   }
   // get wind speed
   getWind(num) {
-    let day = num;
-    let temp = this.data.list[day].wind.speed;
-    return temp;
+    // TODO: changes from m/s to mph
+    let temp = this.data.list[num].wind.speed;
+    if (this.use_metric) {
+      return temp;
+    } else {
+      return meter_per_second_to_miles_per_hour(temp);
+    }
   }
   // get humidity
   getHumidity(num) {
-    let day = num;
-    let temp = this.data.list[day].main.humidity;
+    let temp = this.data.list[num].main.humidity;
     return temp;
   }
   // get icon accordingly to weather
   getIcon(num) {
-    let day = num;
-    let icon = this.data.list[day].weather[0].icon;
+    let icon = this.data.list[num].weather[0].icon;
     return icon;
   }
 }
@@ -194,6 +186,31 @@ const close_mobile_keyboard = () => {
       false
     );
   }, 100);
+};
+
+const evaluate_promise = p => {
+  p.then(response => {
+    weather_data.data = response.data;
+    writeDataToDom();
+  }).catch(error => {
+    // city_input.value = `${data.city.name}, ${data.city.country}`;
+    console.error("City not found, try again ¯\\_(ツ)_/¯");
+    let error_msg_box = document.getElementById("not_found_container");
+    error_msg_box.style.display = "flex";
+
+    document.addEventListener("click", () => {
+      error_msg_box.style.display = "none";
+    });
+
+    console.log(error);
+  });
+};
+
+const celsius_to_fahrenheit = tempCelsius => {
+  return tempCelsius * 1.8 + 32;
+};
+const meter_per_second_to_miles_per_hour = meter_per_second => {
+  return meter_per_second * 2.237;
 };
 
 const writeDataToDom = () => {
@@ -281,8 +298,6 @@ const writeDataToDom = () => {
 
   // weather forecast for tomorrow
   setTimeout(() => {
-    console.log(weather_data.data);
-
     document.getElementById(
       "day-2-temp-min"
     ).innerHTML = `${weather_data.getTempMin(7).toFixed(1)}°`;
@@ -363,25 +378,6 @@ const writeDataToDom = () => {
     animate_circle.classList.remove("turn");
   });
 
-  // change units to metric
-  let celsius = document.getElementById("celsius");
-  let imperial = document.getElementById("imperial");
-  celsius.addEventListener("click", () => {
-    unit = "metric";
-    celsius.classList.add("buttonOn");
-    imperial.classList.add("buttonOff");
-    celsius.classList.remove("buttonOff");
-    imperial.classList.remove("buttonOn");
-  });
-  // change units to imperial
-  imperial.addEventListener("click", () => {
-    unit = "imperial";
-    imperial.classList.add("buttonOn");
-    celsius.classList.add("buttonOff");
-    imperial.classList.remove("buttonOff");
-    celsius.classList.remove("buttonOn");
-  });
-
   // let search_button = document.getElementById("search_button");
   // search_button.addEventListener("click", () => {
   //   let city_input = document.getElementById("city-input");
@@ -392,19 +388,6 @@ const writeDataToDom = () => {
   // });
 
   // create url with user input
-  document
-    .querySelector("#city-input")
-    .addEventListener("keypress", function(e) {
-      let key = e.which || e.keyCode;
-      if (key === 13) {
-        let city_input = document.getElementById("city-input");
-        if (city_input.value != "") {
-          console.log(city_input);
-
-          callAPI(city_input.value);
-        }
-      }
-    });
 
   // change layout, when keyboard is open on mobile devices
   document.getElementById("city-input").addEventListener("click", () => {
@@ -428,21 +411,42 @@ const writeDataToDom = () => {
 
 let weather_data = new WeatherData("Berlin");
 let p = callAPI("Berlin");
+evaluate_promise(p);
 
-p.then(response => {
-  weather_data.data = response.data;
+document.querySelector("#city-input").addEventListener("keypress", function(e) {
+  let key = e.which || e.keyCode;
+  if (key === 13) {
+    let city_input = document.getElementById("city-input");
+    if (city_input.value != "") {
+      console.log(city_input);
+
+      let p = callAPI(city_input.value);
+      evaluate_promise(p);
+    }
+  }
+});
+
+// change units to metric
+let celsius = document.getElementById("celsius");
+let imperial = document.getElementById("imperial");
+celsius.addEventListener("click", () => {
+  weather_data.use_metric = true;
+  unit = "metric";
+  celsius.classList.add("buttonOn");
+  imperial.classList.add("buttonOff");
+  celsius.classList.remove("buttonOff");
+  imperial.classList.remove("buttonOn");
   writeDataToDom();
-}).catch(error => {
-  // city_input.value = `${data.city.name}, ${data.city.country}`;
-  console.error("City not found, try again ¯\\_(ツ)_/¯");
-  let error_msg_box = document.getElementById("not_found_container");
-  error_msg_box.style.display = "flex";
-
-  document.addEventListener("click", () => {
-    error_msg_box.style.display = "none";
-  });
-
-  console.log(error);
+});
+// change units to imperial
+imperial.addEventListener("click", () => {
+  weather_data.use_metric = false;
+  unit = "imperial";
+  imperial.classList.add("buttonOn");
+  celsius.classList.add("buttonOff");
+  imperial.classList.remove("buttonOff");
+  celsius.classList.remove("buttonOn");
+  writeDataToDom();
 });
 
 // clear search input
