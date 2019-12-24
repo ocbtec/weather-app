@@ -35,9 +35,6 @@ class WeatherData {
       "Dec"
     ];
   }
-  update_weather_data(city_input) {
-    // this.data = callAPI(city_input);
-  }
   // get month and day
   getDate(num) {
     let tmpDate = this.data.list[num].dt_txt.slice(5, 10);
