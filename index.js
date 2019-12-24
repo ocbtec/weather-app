@@ -193,7 +193,6 @@ const evaluate_promise = p => {
     weather_data.data = response.data;
     writeDataToDom();
   }).catch(error => {
-    // city_input.value = `${data.city.name}, ${data.city.country}`;
     console.error("City not found, try again ¯\\_(ツ)_/¯");
     let error_msg_box = document.getElementById("not_found_container");
     error_msg_box.style.display = "flex";
@@ -377,6 +376,10 @@ const writeDataToDom = () => {
   animate_circle.addEventListener("animationend", () => {
     animate_circle.classList.remove("turn");
   });
+
+  // write current city to input field
+  let city_input = document.getElementById("city-input");
+  city_input.value = `${weather_data.data.city.name}, ${weather_data.data.city.country}`;
 
   // let search_button = document.getElementById("search_button");
   // search_button.addEventListener("click", () => {
