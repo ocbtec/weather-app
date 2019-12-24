@@ -1,32 +1,5 @@
-const axios = require("axios");
-let hideVirtualKeyboard = require("hide-virtual-keyboard");
-// let countryCodeLookup = require("country-code-lookup");
-
-const monthArray = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec"
-];
-
-let month = "";
-let tmpDate = "";
-
-let unit = "metric";
-let city = "Berlin";
-
-// for delay when displaying weather data
-let refresh_time = 1000;
-
 //  SERVER ********************************************
+const axios = require("axios");
 
 function callAPI(city) {
   let url = `https://api.openweathermap.org/data/2.5/forecast?q=`;
@@ -41,21 +14,35 @@ function callAPI(city) {
 //  /SERVER ********************************************
 
 //  CLIENT ********************************************
-
+let hideVirtualKeyboard = require("hide-virtual-keyboard");
 class WeatherData {
   constructor(city_input) {
     this.city_input = city_input;
     this.data = "";
     this.use_metric = true;
+    this.monthArray = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ];
   }
   update_weather_data(city_input) {
     // this.data = callAPI(city_input);
   }
   // get month and day
   getDate(num) {
-    tmpDate = this.data.list[num].dt_txt.slice(5, 10);
+    let tmpDate = this.data.list[num].dt_txt.slice(5, 10);
     num = tmpDate.slice(3, 5);
-    month = monthArray[tmpDate.slice(0, 2) - 1];
+    let month = this.monthArray[tmpDate.slice(0, 2) - 1];
     return `${month} ${num}`;
   }
   // get current temperature
@@ -213,6 +200,9 @@ const meter_per_second_to_miles_per_hour = meter_per_second => {
 };
 
 const writeDataToDom = () => {
+  // for delay when displaying weather data
+  let refresh_time = 1000;
+
   // write current temp to dom
   let temp = document.getElementById("temp-value");
   let temp_string = weather_data.getTemp(0).toFixed(1);
@@ -224,9 +214,9 @@ const writeDataToDom = () => {
   let temp_symbol = document.getElementById("temp-symbol");
   temp_symbol.style.color = "#cccccc";
   setTimeout(() => {
-    if (unit == "metric") {
+    if (weather_data.use_metric) {
       temp_symbol.innerHTML = " °C";
-    } else if (unit == "imperial") {
+    } else {
       temp_symbol.innerHTML = " °F";
     }
   }, refresh_time);
@@ -262,7 +252,7 @@ const writeDataToDom = () => {
   let wind = document.getElementById("wind");
   setTimeout(() => {
     wind.innerHTML = `Wind: ${weather_data.getWind(0).toFixed(1)} ${
-      unit === "metric" ? `m/s` : "mph"
+      weather_data.use_metric ? `m/s` : "mph"
     }`;
   }, refresh_time + 115);
 
@@ -434,7 +424,6 @@ let celsius = document.getElementById("celsius");
 let imperial = document.getElementById("imperial");
 celsius.addEventListener("click", () => {
   weather_data.use_metric = true;
-  unit = "metric";
   celsius.classList.add("buttonOn");
   imperial.classList.add("buttonOff");
   celsius.classList.remove("buttonOff");
@@ -444,7 +433,6 @@ celsius.addEventListener("click", () => {
 // change units to imperial
 imperial.addEventListener("click", () => {
   weather_data.use_metric = false;
-  unit = "imperial";
   imperial.classList.add("buttonOn");
   celsius.classList.add("buttonOff");
   imperial.classList.remove("buttonOff");
