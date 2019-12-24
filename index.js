@@ -181,6 +181,9 @@ const evaluate_promise = p => {
     let error_msg_box = document.getElementById("not_found_container");
     error_msg_box.style.display = "flex";
 
+    let city_input = document.getElementById("city-input");
+    city_input.value = `${weather_data.data.city.name}, ${weather_data.data.city.country}`;
+
     document.addEventListener("click", () => {
       error_msg_box.style.display = "none";
     });
@@ -367,6 +370,8 @@ const writeDataToDom = () => {
   // write current city to input field
   let city_input = document.getElementById("city-input");
   city_input.value = `${weather_data.data.city.name}, ${weather_data.data.city.country}`;
+  // console.log(city_input.value);
+  // console.log(city_input);
 
   // let search_button = document.getElementById("search_button");
   // search_button.addEventListener("click", () => {
@@ -408,8 +413,6 @@ document.querySelector("#city-input").addEventListener("keypress", function(e) {
   if (key === 13) {
     let city_input = document.getElementById("city-input");
     if (city_input.value != "") {
-      console.log(city_input);
-
       let p = callAPI(city_input.value);
       evaluate_promise(p);
     }
@@ -438,11 +441,7 @@ imperial.addEventListener("click", () => {
 });
 
 // clear search input
-weather_data.city_input != undefined && (weather_data.city_input.value = "");
-
-// if (city_input != undefined) {
-//   city_input.value = "";
-// }
+// weather_data.city_input != undefined && (weather_data.city_input.value = "");
 
 //  /CLIENT ********************************************
 
