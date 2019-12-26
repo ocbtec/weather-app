@@ -130,6 +130,9 @@ class WeatherData {
     let icon = this.data.list[num].weather[0].icon;
     return icon;
   }
+  formatCityString() {
+    return `${this.data.city.name}, ${this.data.city.country}`;
+  }
 }
 
 // set mobile layout to standard (keyboard closed)
@@ -159,7 +162,7 @@ const evaluate_promise = p => {
     error_msg_box.style.display = "flex";
 
     let city_input = document.getElementById("city-input");
-    city_input.value = `${weather_data.data.city.name}, ${weather_data.data.city.country}`;
+    city_input.value = weather_data.formatCityString();
 
     document.addEventListener("click", () => {
       error_msg_box.style.display = "none";
@@ -346,9 +349,7 @@ const writeDataToDom = () => {
 
   // write current city to input field
   let city_input = document.getElementById("city-input");
-  city_input.value = `${weather_data.data.city.name}, ${weather_data.data.city.country}`;
-  // console.log(city_input.value);
-  // console.log(city_input);
+  city_input.value = weather_data.formatCityString();
 
   // let search_button = document.getElementById("search_button");
   // search_button.addEventListener("click", () => {
@@ -388,7 +389,11 @@ document.querySelector("#city-input").addEventListener("keypress", function(e) {
   let key = e.which || e.keyCode;
   if (key === 13) {
     let city_input = document.getElementById("city-input");
-    if (city_input.value != "") {
+    if (
+      city_input.value != "" &&
+      city_input.value != weather_data.city_input &&
+      city_input.value != weather_data.formatCityString()
+    ) {
       let p = callAPI(city_input.value);
       evaluate_promise(p);
     }
