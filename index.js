@@ -145,13 +145,6 @@ const mobile_layout = () => {
   window.scrollTo(0, 1); // macht das was???
 };
 
-const mobile_keyboard_open = () => {
-  let circle = document.getElementById("circle");
-  let slide_container = document.getElementById("slide-container");
-  circle.style.margin = "5% 0%";
-  slide_container.style.display = "none";
-};
-
 const evaluate_promise = p => {
   p.then(response => {
     weather_data.data = response.data;
@@ -359,20 +352,6 @@ const writeDataToDom = () => {
   //     callAPI(forecast, city_input);
   //   }
   // });
-
-  // create url with user input
-
-  // change layout, when keyboard is open on mobile devices
-  document.getElementById("city-input").addEventListener("click", () => {
-    if (
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      )
-    ) {
-      // attribute settings for open keyboard on mobile phones
-      mobile_keyboard_open();
-    }
-  });
 
   // hide mobile keyboard after input
   hideVirtualKeyboard();
