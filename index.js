@@ -149,29 +149,6 @@ const mobile_keyboard_open = () => {
   slide_container.style.display = "none";
 };
 
-// attribute settings back to mobile view without keyboard
-const close_mobile_keyboard = () => {
-  setTimeout(() => {
-    let grid = document.getElementById("grid-selector");
-    let except = document.getElementById("city-input");
-    grid.addEventListener(
-      "click",
-      () => {
-        mobile_layout();
-      },
-      false
-    );
-    except.addEventListener(
-      "click",
-      ev => {
-        null;
-        ev.stopPropagation();
-      },
-      false
-    );
-  }, 100);
-};
-
 const evaluate_promise = p => {
   p.then(response => {
     weather_data.data = response.data;
@@ -393,7 +370,6 @@ const writeDataToDom = () => {
     ) {
       // attribute settings for open keyboard on mobile phones
       mobile_keyboard_open();
-      // close_mobile_keyboard();
     }
   });
 
@@ -444,5 +420,3 @@ imperial.addEventListener("click", () => {
 // weather_data.city_input != undefined && (weather_data.city_input.value = "");
 
 //  /CLIENT ********************************************
-
-// attribute settings for open keyboard on mobile phones
