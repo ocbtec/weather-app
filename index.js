@@ -139,7 +139,7 @@ class WeatherData {
 const mobile_layout = () => {
   let circle = document.getElementById("circle");
   let slide_container = document.getElementById("slide-container");
-  circle.style.margin = "20px 0";
+  // circle.style.margin = "20px 0";
   slide_container.style.display = "block";
 
   window.scrollTo(0, 1); // macht das was???
