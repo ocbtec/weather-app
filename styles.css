@@ -288,7 +288,7 @@ button {
   align-items: center;
 }
 #arrow-left {
-  height: 50px;
+  height: 40px;
 }
 .arrow-right-container {
   position: absolute;
@@ -300,8 +300,7 @@ button {
   align-items: center;
 }
 #arrow-right {
-  position: absolute;
-  height: 50px;
+  height: 40px;
 }
 .temp_unit_class {
   vertical-align: -webkit-baseline-middle;
@@ -408,7 +407,7 @@ button {
   align-self: center;
   margin: 0 auto;
   display: block;
-  width: 80%;
+  width: 70%;
 }
 .dates {
   grid-row: 1;
@@ -426,6 +425,7 @@ button {
   align-self: center;
   color: #402b0d;
   text-shadow: 1px 1px 1px #616161;
+  margin-bottom: 5px;
 }
 .min-temps {
   grid-column: 1 / 2;
