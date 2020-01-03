@@ -445,8 +445,8 @@ button {
 
 /* @media screen and (orientation: portrait) { */
 /* } */
-@media screen and (min-width: 500px) {
+/* @media screen and (min-width: 500px) {
   #background-img {
     width: 50%;
   }
-}
+} */

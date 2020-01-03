@@ -368,11 +368,7 @@ document.querySelector("#city-input").addEventListener("keypress", function(e) {
   let key = e.which || e.keyCode;
   if (key === 13) {
     let city_input = document.getElementById("city-input");
-    if (
-      city_input.value != "" &&
-      city_input.value != weather_data.city_input &&
-      city_input.value != weather_data.formatCityString()
-    ) {
+    if (city_input.value != "") {
       let p = callAPI(city_input.value);
       evaluate_promise(p);
     }
