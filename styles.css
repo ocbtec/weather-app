@@ -21,7 +21,7 @@ body {
 
 .grid {
   display: grid;
-  grid-template-rows: 60px 50px auto 100px;
+  grid-template-rows: 65px 50px auto 100px;
   height: 100vh;
 }
 
