@@ -7,7 +7,7 @@
 
 html {
   height: 100vh;
-  background: url(img/background_cloudy_2.jpg) no-repeat;
+  background: url(img/background_cloudy_3.jpg) no-repeat;
   -webkit-background-size: 1000px 1000px;
   -moz-background-size: 1000px 1000px;
   -o-background-size: 1000px 1000px;
@@ -450,3 +450,12 @@ button {
     width: 50%;
   }
 } */
+
+@media screen and (max-height: 520px) {
+  #grid-selector {
+    grid-template-rows: 60px 50px 360px 100px;
+  }
+  html {
+    background-position: 70% 50%;
+  }
+}
