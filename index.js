@@ -209,10 +209,10 @@ const writeDataToDom = () => {
   setTimeout(() => {
     temp_min.innerHTML = `${temp_min_string}° <span id="temp-min-span">Min</span>`;
     document.getElementById("temp-min-span").style.cssText =
-      "font-size: 12pt; color: #6ca1d0; text-shadow: 1px 1px 1px #616161;";
+      "color: #6ca1d0; text-shadow: 1px 1px 1px #616161;";
     temp_max.innerHTML = `${temp_max_string}° <span id="temp-max-span">Max</span> `;
     document.getElementById("temp-max-span").style.cssText =
-      "font-size: 12pt; color: #b94848; text-shadow: 1px 1px 1px #616161;";
+      "color: #b94848; text-shadow: 1px 1px 1px #616161;";
   }, refresh_time + 100);
 
   // write weather description to dom
