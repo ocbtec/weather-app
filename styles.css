@@ -547,18 +547,18 @@ button {
     /* transform: translate(20%, 0%); */
   }
   #weather_data {
-    width: 36%;
-    grid-template-rows: 43% 17% 15% 16%;
+    width: 42%;
+    grid-template-rows: 38% 17% 15% 21%;
   }
   #temp-value {
-    font-size: 40pt;
+    font-size: 30pt;
   }
   #forecast-container {
     overflow: visible;
     display: flex;
     flex-direction: column;
-    width: 70%;
-    height: 500px;
+    width: 60%;
+    height: 350px;
     opacity: 0.8;
   }
   .arrow-left-container {
@@ -569,7 +569,7 @@ button {
   }
   .forecast {
     width: 100%;
-    height: 100px;
+    height: 70px;
     border-bottom: 1px solid #7b828c;
     grid-template-rows: 50% 50%;
     grid-template-columns: 2fr 1fr 2fr;
@@ -604,6 +604,12 @@ button {
     width: 80%;
   }
   .forecast-icons {
-    width: 100%;
+    width: 70%;
+  }
+}
+
+@media screen and (min-width: 920px) {
+  #weather_data {
+    grid-template-rows: 42% 17% 15% 18%;
   }
 }
