@@ -269,7 +269,7 @@ const writeDataToDom = () => {
     document.getElementById("day-2-date").innerHTML = weather_data.getDate(7);
     document.getElementById(
       "day-2-icon"
-    ).src = `http://openweathermap.org/img/wn/${weather_data.getIcon(
+    ).src = `https://openweathermap.org/img/wn/${weather_data.getIcon(
       7
     )}@2x.png`;
 
@@ -283,7 +283,7 @@ const writeDataToDom = () => {
     document.getElementById("day-3-date").innerHTML = weather_data.getDate(15);
     document.getElementById(
       "day-3-icon"
-    ).src = `http://openweathermap.org/img/wn/${weather_data.getIcon(
+    ).src = `https://openweathermap.org/img/wn/${weather_data.getIcon(
       15
     )}@2x.png`;
 
@@ -297,7 +297,7 @@ const writeDataToDom = () => {
     document.getElementById("day-4-date").innerHTML = weather_data.getDate(23);
     document.getElementById(
       "day-4-icon"
-    ).src = `http://openweathermap.org/img/wn/${weather_data.getIcon(
+    ).src = `https://openweathermap.org/img/wn/${weather_data.getIcon(
       23
     )}@2x.png`;
 
@@ -311,7 +311,7 @@ const writeDataToDom = () => {
     document.getElementById("day-5-date").innerHTML = weather_data.getDate(31);
     document.getElementById(
       "day-5-icon"
-    ).src = `http://openweathermap.org/img/wn/${weather_data.getIcon(
+    ).src = `https://openweathermap.org/img/wn/${weather_data.getIcon(
       31
     )}@2x.png`;
 
@@ -325,7 +325,7 @@ const writeDataToDom = () => {
     document.getElementById("day-6-date").innerHTML = weather_data.getDate(39);
     document.getElementById(
       "day-6-icon"
-    ).src = `http://openweathermap.org/img/wn/${weather_data.getIcon(
+    ).src = `https://openweathermap.org/img/wn/${weather_data.getIcon(
       39
     )}@2x.png`;
   }, refresh_time + 120);
