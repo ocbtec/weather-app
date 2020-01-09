@@ -354,7 +354,7 @@ const writeDataToDom = () => {
   // });
 
   // hide mobile keyboard after input
-  hideVirtualKeyboard();
+  // hideVirtualKeyboard();
 
   // set mobile layout to standard (keyboard closed)
   mobile_layout();
