@@ -575,10 +575,10 @@ button {
     grid-template-columns: 2fr 1fr 2fr;
   }
   #slide-container {
-    overflow: visible;
-    grid-row: 3;
-    height: 250px;
-    top: 60px;
+    overflow: visible !important;
+    grid-row: 3 !important;
+    height: 250px !important;
+    top: 60px !important;
   }
   .forecast-icons {
     width: 30%;
