@@ -253,7 +253,7 @@ const writeDataToDom = () => {
     downloadingImage.onload = function() {
       image.src = this.src;
     };
-    downloadingImage.src = `http://openweathermap.org/img/wn/${weather_data.getIcon(
+    downloadingImage.src = `https://openweathermap.org/img/wn/${weather_data.getIcon(
       0
     )}@2x.png`;
   }, refresh_time);
