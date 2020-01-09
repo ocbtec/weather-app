@@ -1,5 +1,4 @@
 //  SERVER ********************************************
-// const axios = require("axios");
 
 function callAPI(city) {
   let url = `https://api.openweathermap.org/data/2.5/forecast?q=`;
@@ -14,7 +13,6 @@ function callAPI(city) {
 //  /SERVER ********************************************
 
 //  CLIENT ********************************************
-// let hideVirtualKeyboard = require("hide-virtual-keyboard");
 class WeatherData {
   constructor(city_input) {
     this.city_input = city_input;
@@ -137,12 +135,8 @@ class WeatherData {
 
 // set mobile layout to standard (keyboard closed)
 const mobile_layout = () => {
-  let circle = document.getElementById("circle");
   let slide_container = document.getElementById("slide-container");
-  // circle.style.margin = "20px 0";
   slide_container.style.display = "block";
-
-  window.scrollTo(0, 1); // macht das was???
 };
 
 const evaluate_promise = p => {
@@ -344,17 +338,9 @@ const writeDataToDom = () => {
   let city_input = document.getElementById("city-input");
   city_input.value = weather_data.formatCityString();
 
-  // let search_button = document.getElementById("search_button");
-  // search_button.addEventListener("click", () => {
-  //   let city_input = document.getElementById("city-input");
-  //   if (city_input.value != "") {
-
-  //     callAPI(forecast, city_input);
-  //   }
-  // });
-
   // hide mobile keyboard after input
-  // hideVirtualKeyboard();
+  let input = document.getElementById("city-input");
+  input.blur();
 
   // set mobile layout to standard (keyboard closed)
   mobile_layout();
