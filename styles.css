@@ -614,7 +614,7 @@ button {
   }
 }
 
-@media screen and (max-height: 360px) {
+/* @media screen and (max-height: 360px) {
   html {
     background-size: cover;
   }
@@ -644,9 +644,7 @@ button {
   }
   #turning_circle,
   #background-img {
-    /* top: 100px; */
     width: 70%;
-    /* transform: translate(20%, 0%); */
   }
   #weather_data {
     width: 48%;
@@ -731,4 +729,4 @@ button {
   .forecast-icons {
     width: 70%;
   }
-}
+} */
