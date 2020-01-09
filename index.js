@@ -1,5 +1,5 @@
 //  SERVER ********************************************
-const axios = require("axios");
+// const axios = require("axios");
 
 function callAPI(city) {
   let url = `https://api.openweathermap.org/data/2.5/forecast?q=`;
@@ -14,7 +14,7 @@ function callAPI(city) {
 //  /SERVER ********************************************
 
 //  CLIENT ********************************************
-let hideVirtualKeyboard = require("hide-virtual-keyboard");
+// let hideVirtualKeyboard = require("hide-virtual-keyboard");
 class WeatherData {
   constructor(city_input) {
     this.city_input = city_input;
