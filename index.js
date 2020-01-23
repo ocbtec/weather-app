@@ -5,8 +5,6 @@ function callAPI(city) {
   const apiKey = `&APPID=d84a3b5a1d8ffa8e702549aec5e6ec79`;
   let forecast = url + city + "&units=metric" + apiKey;
 
-  console.log(forecast);
-
   return axios.get(forecast);
 }
 
@@ -144,7 +142,6 @@ const evaluate_promise = p => {
     weather_data.data = response.data;
     writeDataToDom();
   }).catch(error => {
-    console.error("City not found, try again ¯\\_(ツ)_/¯");
     let error_msg_box = document.getElementById("not_found_container");
     error_msg_box.style.display = "flex";
 
@@ -154,8 +151,6 @@ const evaluate_promise = p => {
     document.addEventListener("click", () => {
       error_msg_box.style.display = "none";
     });
-
-    console.log(error);
   });
 };
 
