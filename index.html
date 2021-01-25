@@ -25,9 +25,10 @@
 
       <div id="search">
         <div id="search_container">
-          <input id="city-input" value="Berlin, DE" onclick="this.select();" />
+          <input id="city-input" value="Berlin, DE" onclick="select()" />
           <img id="location-icon" src="img/location.svg" alt="" />
-          <!-- <button id="search_button">Go</button> -->
+          <button id="search_button" onclick="getCity();">Go</button>
+
 
           <div id="temp_unit">
             <span id="celsius" class="temp_unit_class buttonOn">°C</span>

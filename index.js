@@ -344,17 +344,26 @@ const writeDataToDom = () => {
 let weather_data = new WeatherData("Berlin");
 let p = callAPI("Berlin");
 evaluate_promise(p);
+let city_input = document.getElementById("city-input");
+
+const newCity = (city_input) => {
+  if (city_input.value != "") {
+    let p = callAPI(city_input.value);
+    evaluate_promise(p);
+  }
+}
 
 document.querySelector("#city-input").addEventListener("keypress", function(e) {
   let key = e.which || e.keyCode;
   if (key === 13) {
-    let city_input = document.getElementById("city-input");
-    if (city_input.value != "") {
-      let p = callAPI(city_input.value);
-      evaluate_promise(p);
-    }
+    newCity(city_input);
   }
 });
+
+const getCity = () => {
+  newCity(city_input);
+}
+
 
 // change units to metric
 let celsius = document.getElementById("celsius");
