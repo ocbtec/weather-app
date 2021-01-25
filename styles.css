@@ -298,6 +298,7 @@ button {
   height: 100%;
   line-height: 50px;
   text-align: center;
+  cursor: pointer;
 }
 
 .buttonOn {
