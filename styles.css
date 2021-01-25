@@ -82,7 +82,7 @@ h1 {
   color: white;
   background-color: #263954a8;
   opacity: 0.5;
-  font-size: 16pt;
+  font-size: 12pt;
   text-indent: 40px;
 }
 
@@ -467,6 +467,9 @@ button {
   }
   #search {
     grid-column: 1 / 3;
+  }
+  #city-input {
+    font-size: 15pt;
   }
   #main {
     grid-row: 3;
