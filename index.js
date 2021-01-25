@@ -386,7 +386,4 @@ imperial.addEventListener("click", () => {
   writeDataToDom();
 });
 
-// clear search input
-// weather_data.city_input != undefined && (weather_data.city_input.value = "");
-
 //  /CLIENT ********************************************
